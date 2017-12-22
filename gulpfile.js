@@ -2,11 +2,11 @@ var gulp = require('gulp');
 var ts = require('gulp-typescript');
 
 
-/* Backend Typescript */
+/* Backend */
 
 var tsSrc = './src/backend/**/*.ts';
 
-gulp.task('compile:backend:ts', function () {
+gulp.task('backend:compile:ts', function () {
     var tsProject = ts.createProject('tsconfig.json');
     var tsResult = gulp.src(tsSrc)
         .pipe(tsProject());
@@ -15,6 +15,9 @@ gulp.task('compile:backend:ts', function () {
     );
 });
 
-gulp.task('watch:backend:ts', function () {
-    gulp.watch(tsSrc, ['compile:backend:ts']);
+gulp.task("views:copy", function () {
+    gulp.src("./src/backend/views/**/*")
+        .pipe(gulp.dest("./dist/views"));
 });
+
+gulp.task("default", ["backend:compile:ts", "views:copy"]);

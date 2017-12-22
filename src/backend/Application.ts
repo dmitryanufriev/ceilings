@@ -1,22 +1,27 @@
 import * as http from "http";
+import * as path from "path";
 import * as express from "express";
 
 import { ISettings } from "./settings/ISettings";
 import { SettingsManual } from "./settings/SettingsManual";
+import { SettingsNunjucks } from "./settings/SettingsNunjucks";
 import { Routes } from "./http/Routes";
 import { ReqHome } from "./home/ReqHome";
-import { ResTextMessage } from "./home/ResTextMessage";
+import { ResHtmlNunjucks } from "./home/ResHtmlNunjucks";
 
 export class Application {
     private settings: ISettings;
     private routes: Routes;
 
     constructor() {
-        this.settings = new SettingsManual(8080);
+        this.settings = new SettingsNunjucks(
+            path.join(__dirname, 'views'),
+            new SettingsManual(8080)
+        );
         this.routes = new Routes(
             new ReqHome(
                 "/",
-                new ResTextMessage()
+                new ResHtmlNunjucks("home/index.html")
             )
         );
     }
