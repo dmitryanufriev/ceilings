@@ -1,0 +1,17 @@
+{
+  "name": "ceilings",
+  "engines": {
+    "node": "=8.9.3"
+  },
+  "version": "1.0.0",
+  "description": "Web site about ceilings",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": {
+    "name": "Dmitry Anufriev",
+    "email": "dmitryanufriev@gmail.com"
+  },
+  "license": "MIT"
+}
