@@ -9,6 +9,6 @@ export class ResHtmlNunjucks implements IResponse {
     }
 
     public render(res: express.Response, values: any): void {
-        res.render(this.template);
+        res.render(this.template, values);
     }
 }
