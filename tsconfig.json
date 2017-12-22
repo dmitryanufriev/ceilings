@@ -9,6 +9,6 @@
         "outDir": "./dist"
     },
     "files":[
-        "./src/backend/Server.ts"
+        "./src/backend/Application.ts"
     ]
 }

@@ -1,3 +1,5 @@
+import * as express from "express";
+
 export interface ISettings { 
-    port(): number;
+    setUp(app: express.Application): void;
 }

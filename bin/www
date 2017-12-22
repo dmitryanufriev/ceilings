@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 "use strict";
 
-var server = require("../dist/Server");
-new server.Server().start();
+var app = require("../dist/Application");
+new app.Application().run();

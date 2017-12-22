@@ -2,27 +2,31 @@ import * as http from "http";
 import * as express from "express";
 
 import { ISettings } from "./settings/ISettings";
-import { IRequest } from "./http/IRequest";
+import { SettingsManual } from "./settings/SettingsManual";
+import { Routes } from "./http/Routes";
+import { ReqHome } from "./home/ReqHome";
+import { ResTextMessage } from "./home/ResTextMessage";
 
 export class Application {
-    private app: express.Application;
-    private requests: IRequest[];
+    private settings: ISettings;
+    private routes: Routes;
 
-    constructor(...requests: IRequest[]) {
-        this.app = express();
-        this.requests = requests;
+    constructor() {
+        this.settings = new SettingsManual(8080);
+        this.routes = new Routes(
+            new ReqHome(
+                "/",
+                new ResTextMessage()
+            )
+        );
     }
 
-    public run(settings: ISettings) {
-        for (let request of this.requests) {
-            request.attach(this.app);
-        }
-        http.createServer(this.app)
-            .listen(settings.port())
-            .on(
-                "listening",
-                () => console.log(`Listen on port ${settings.port()}...`)
-            );
+    public run() {
+        let app = express();
+        this.routes.setUp(app);
+        this.settings.setUp(app);
+        let server = http.createServer(app).listen(app.settings.port);
+        server.on("listening", () => console.log(`Listen on port ${server.address().port}...`));
     }
 
     private onListeningIncomingRequests() {

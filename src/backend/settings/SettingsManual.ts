@@ -1,3 +1,4 @@
+import * as express from "express";
 import { ISettings } from "./ISettings";
 
 export class SettingsManual implements ISettings {
@@ -7,7 +8,7 @@ export class SettingsManual implements ISettings {
         this.httpPort = port;
     }
 
-    public port(): number {
-        return this.httpPort;
+    public setUp(app: express.Application): void {
+        app.set("port", this.httpPort);
     }
 }
