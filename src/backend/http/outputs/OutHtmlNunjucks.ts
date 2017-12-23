@@ -1,3 +1,4 @@
+import * as nunjucks from "nunjucks";
 import { Response } from "express";
 import { IOutput } from "./IOutput";
 
@@ -15,6 +16,7 @@ export class OutHtmlNunjucks implements IOutput {
     }
 
     write(res: Response): void {
-        res.render(this.template, this.values);
+        res.write(nunjucks.render(this.template, this.values));
+        res.end();
     }
 }
