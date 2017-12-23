@@ -1,23 +1,15 @@
-import * as express from "express";
-import { IRequest } from "../http/IRequest";
-import { IResponse } from "../http/IReponse";
+import { Request } from "express";
+import { IRequest } from "../http/requests/IRequest";
+import { IOutput } from "../http/outputs/IOutput";
 
 export class ReqHome implements IRequest {
-    private url: string;
-    private response: IResponse;
+    private out: IOutput;
 
-    constructor(url: string, response: IResponse) {
-        this.url = url;
-        this.response = response;
+    constructor(output: IOutput) {
+        this.out = output;
     }
 
-    public attach(router: express.Router): void {
-        router.get('/', this.get.bind(this));
-    }
-
-    private get(req: express.Request, res: express.Response) {
-        this.response.render(res, {
-            message: "Hello world"
-        });
+    public output(req: Request): IOutput {
+        return this.out;
     }
 }
