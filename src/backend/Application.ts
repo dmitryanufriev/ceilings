@@ -1,14 +1,14 @@
+import * as express from "express";
 import * as http from "http";
 import * as path from "path";
-import * as express from "express";
 
+import { ReqHome } from "./home/ReqHome";
+import { OutHtmlNunjucks } from "./http/outputs/OutHtmlNunjucks";
+import { RouteGet } from "./http/routing/RouteGet";
+import { Routes } from "./http/routing/Routes";
 import { ISettings } from "./settings/ISettings";
 import { SettingsManual } from "./settings/SettingsManual";
 import { SettingsNunjucks } from "./settings/SettingsNunjucks";
-import { Routes } from "./http/routing/Routes";
-import { RouteGet } from "./http/routing/RouteGet";
-import { ReqHome } from "./home/ReqHome";
-import { OutHtmlNunjucks } from "./http/outputs/OutHtmlNunjucks";
 
 enum Urls {
     Home = "/"
@@ -20,7 +20,7 @@ export class Application {
 
     constructor() {
         this.settings = new SettingsNunjucks(
-            path.join(__dirname, 'views'),
+            path.join(__dirname, "views"),
             new SettingsManual(8080)
         );
 
@@ -37,10 +37,10 @@ export class Application {
     }
 
     public run() {
-        let app = express();
+        const app = express();
         this.settings.setUp(app);
         this.routes.setUp(app);
-        let server = http.createServer(app).listen(app.settings.port);
+        const server = http.createServer(app).listen(app.settings.port);
         server.on("listening", () => console.log(`Listen on port ${server.address().port}...`));
     }
 }

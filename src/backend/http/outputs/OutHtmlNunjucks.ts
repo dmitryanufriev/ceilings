@@ -1,5 +1,5 @@
-import * as nunjucks from "nunjucks";
 import { Response } from "express";
+import * as nunjucks from "nunjucks";
 import { IOutput } from "./IOutput";
 
 export class OutHtmlNunjucks implements IOutput {
@@ -11,11 +11,11 @@ export class OutHtmlNunjucks implements IOutput {
         this.values = values;
     }
 
-    with(values: any): IOutput {
+    public with(values: any): IOutput {
         return new OutHtmlNunjucks(this.template, this.values);
     }
 
-    write(res: Response): void {
+    public write(res: Response): void {
         res.write(nunjucks.render(this.template, this.values));
         res.end();
     }

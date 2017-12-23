@@ -9,8 +9,8 @@ export class Routes {
     }
 
     public setUp(app: Application) {
-        let router = Router();
-        for (let route of this.routes) {
+        const router = Router();
+        for (const route of this.routes) {
             route.extend(router);
         }
         app.use(router);

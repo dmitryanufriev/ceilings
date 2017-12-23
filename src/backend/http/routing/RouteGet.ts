@@ -1,6 +1,6 @@
-import { Router, Request, Response } from "express";
-import { IRoute } from "./IRoute";
+import { Request, Response, Router } from "express";
 import { IRequest } from "../requests/IRequest";
+import { IRoute } from "./IRoute";
 
 export class RouteGet implements IRoute {
     private url: string;
@@ -12,7 +12,7 @@ export class RouteGet implements IRoute {
     }
 
     public extend(router: Router) {
-        let request = this.request;
+        const request = this.request;
         router
             .route(this.url)
             .get((req: Request, res: Response) => request.output(req).write(res));

@@ -1,6 +1,6 @@
 import { Request } from "express";
-import { IRequest } from "../http/requests/IRequest";
 import { IOutput } from "../http/outputs/IOutput";
+import { IRequest } from "../http/requests/IRequest";
 
 export class ReqHome implements IRequest {
     private out: IOutput;

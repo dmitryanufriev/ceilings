@@ -1,0 +1,20 @@
+{
+    "extends": "tslint:latest",
+    "rules": {
+        "curly": true,
+        "triple-equals": true,
+        "no-console": false,
+        "trailing-comma": [
+            true,
+            {
+                "multiline": {
+                    "objects": "never"
+                }
+            }
+        ]
+    },
+    "jsRules": {
+        "curly": true
+    },
+    "rulesDirectory": []
+}
