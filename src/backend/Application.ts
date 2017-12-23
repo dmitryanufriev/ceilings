@@ -10,6 +10,10 @@ import { RouteGet } from "./http/routing/RouteGet";
 import { ReqHome } from "./home/ReqHome";
 import { OutHtmlNunjucks } from "./http/outputs/OutHtmlNunjucks";
 
+enum Urls {
+    Home = "/"
+}
+
 export class Application {
     private settings: ISettings;
     private routes: Routes;
@@ -22,7 +26,7 @@ export class Application {
 
         this.routes = new Routes(
             new RouteGet(
-                "/",
+                Urls.Home,
                 new ReqHome(
                     new OutHtmlNunjucks(
                         "home/index.html"
@@ -38,9 +42,5 @@ export class Application {
         this.routes.setUp(app);
         let server = http.createServer(app).listen(app.settings.port);
         server.on("listening", () => console.log(`Listen on port ${server.address().port}...`));
-    }
-
-    private onListeningIncomingRequests() {
-        console.log("Listen app...");
     }
 }
