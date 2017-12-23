@@ -22,9 +22,9 @@ gulp.task('backend:compile:ts', function () {
     );
 });
 
-gulp.task("views:copy", function () {
+gulp.task("backend:views:copy", function () {
     gulp.src("./src/backend/views/**/*")
         .pipe(gulp.dest("./dist/views"));
 });
 
-gulp.task("default", ["backend:lint:ts", "backend:compile:ts", "views:copy"]);
+gulp.task("default", ["backend:lint:ts", "backend:compile:ts", "backend:views:copy"]);
