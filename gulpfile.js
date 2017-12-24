@@ -54,11 +54,18 @@ gulp.task("frontend:font:styles:copy", function() {
         .pipe(gulp.dest("./dist/public/styles"));
 });
 
+gulp.task("frontend:images:copy", function() {
+    gulp
+        .src("./src/frontend/images/**/*")
+        .pipe(gulp.dest("./dist/public/images"));
+});
+
 gulp.task("default", [
     "backend:lint:ts",
     "backend:compile:ts",
     "backend:views:copy",
     "frontend:compile:less",
     "frontend:font:copy",
-    "frontend:font:styles:copy"
+    "frontend:font:styles:copy",
+    "frontend:images:copy"
 ]);
