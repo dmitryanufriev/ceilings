@@ -9,6 +9,7 @@ import { Routes } from "./http/routing/Routes";
 import { ISettings } from "./settings/ISettings";
 import { SettingsManual } from "./settings/SettingsManual";
 import { SettingsNunjucks } from "./settings/SettingsNunjucks";
+import { SettingsStaticResources } from "./settings/SettingsStaticResources";
 
 enum Urls {
     Home = "/"
@@ -21,7 +22,11 @@ export class Application {
     constructor() {
         this.settings = new SettingsNunjucks(
             path.join(__dirname, "views"),
-            new SettingsManual(8080)
+            new SettingsStaticResources(
+                path.join(__dirname, "public"),
+                "/public",
+                new SettingsManual(8080)
+            )
         );
 
         this.routes = new Routes(

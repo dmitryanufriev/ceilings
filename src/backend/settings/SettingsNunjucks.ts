@@ -12,9 +12,9 @@ export class SettingsNunjucks implements ISettings {
     }
 
     public setUp(app: express.Application): void {
+        this.origin.setUp(app);
         nunjucks.configure(this.viewsPath, {
             autoescape: true
         });
-        this.origin.setUp(app);
     }
 }
