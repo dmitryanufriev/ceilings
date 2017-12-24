@@ -8,6 +8,7 @@
   "description": "Web site about ceilings",
   "main": "index.js",
   "scripts": {
+    "dev": "NODE_ENV=development nodemon ./bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": {
@@ -29,6 +30,7 @@
     "gulp-tslint": "^8.1.2",
     "gulp-typescript": "^3.2.3",
     "less-plugin-autoprefix": "^1.5.1",
+    "nodemon": "^1.14.3",
     "tslint": "^5.8.0",
     "typescript": "^2.6.2"
   }
