@@ -44,9 +44,21 @@ gulp.task("frontend:compile:less", function() {
         .pipe(gulp.dest("./dist/public/styles"));
 });
 
+gulp.task("frontend:font:copy", function() {
+    gulp.src("./src/frontend/font/*").pipe(gulp.dest("./dist/public/font"));
+});
+
+gulp.task("frontend:font:styles:copy", function() {
+    gulp
+        .src("./src/frontend/styles/font/*")
+        .pipe(gulp.dest("./dist/public/styles"));
+});
+
 gulp.task("default", [
     "backend:lint:ts",
     "backend:compile:ts",
     "backend:views:copy",
-    "frontend:compile:less"
+    "frontend:compile:less",
+    "frontend:font:copy",
+    "frontend:font:styles:copy"
 ]);
