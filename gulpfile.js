@@ -4,6 +4,10 @@ var ts = require("gulp-typescript");
 var less = require("gulp-less");
 var minifyCSS = require("gulp-minify-css");
 var rename = require("gulp-rename");
+var browserify = require("browserify");
+var source = require("vinyl-source-stream");
+var uglify = require("gulp-uglify");
+var buffer = require("vinyl-buffer");
 var LessAutoprefix = require("less-plugin-autoprefix");
 
 var autoprefix = new LessAutoprefix({ browsers: ["last 2 versions"] });
@@ -60,11 +64,24 @@ gulp.task("frontend:images:copy", function() {
         .pipe(gulp.dest("./dist/public/images"));
 });
 
+gulp.task("frontend:compile:js", function() {
+    browserify({
+        entries: "./src/frontend/scripts/app.js",
+        debug: false
+    })
+        .bundle()
+        .pipe(source("scripts.min.js"))
+        .pipe(buffer())
+        .pipe(uglify())
+        .pipe(gulp.dest("./dist/public/scripts"));
+});
+
 gulp.task("default", [
     "backend:lint:ts",
     "backend:compile:ts",
     "backend:views:copy",
     "frontend:compile:less",
+    "frontend:compile:js",
     "frontend:font:copy",
     "frontend:font:styles:copy",
     "frontend:images:copy"
