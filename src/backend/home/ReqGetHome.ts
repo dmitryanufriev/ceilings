@@ -9,7 +9,7 @@ export class ReqGetHome implements IRequest {
         this.out = output;
     }
 
-    public output(req: Request): IOutput {
-        return this.out;
+    public output(req: Request): Promise<IOutput> {
+        return Promise.resolve(this.out);
     }
 }

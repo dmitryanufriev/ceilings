@@ -15,6 +15,9 @@ export class RouteGet implements IRoute {
         const request = this.request;
         router
             .route(this.url)
-            .get((req: Request, res: Response) => request.output(req).write(res));
+            .get(async (req: Request, res: Response) => {
+                const out = await request.output(req);
+                out.write(res);
+            });
     }
 }
