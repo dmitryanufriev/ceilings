@@ -1,5 +1,8 @@
 
 .icon-phone:before { content: '\e800'; } /* '' */
+.icon-left-open:before { content: '\e801'; } /* '' */
+.icon-right-open:before { content: '\e802'; } /* '' */
+.icon-eye:before { content: '\e803'; } /* '' */
 .icon-facebook-circled:before { content: '\f30d'; } /* '' */
 .icon-instagram:before { content: '\f32d'; } /* '' */
 .icon-vkontakte:before { content: '\f354'; } /* '' */
