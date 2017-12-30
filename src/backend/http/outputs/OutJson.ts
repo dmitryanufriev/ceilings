@@ -13,7 +13,7 @@ export class OutJson implements IOutput {
     }
 
     public write(res: Response): void {
-        res.write(JSON.stringify(this.values));
-        res.end();
+        res.setHeader("Content-Type", "application/json");
+        res.send(JSON.stringify(this.values));
     }
 }
