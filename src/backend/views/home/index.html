@@ -26,19 +26,22 @@
     <div id="portfolio" class="row pb-4">
         <div class="col-sm">
             <h3 class="mt-3 mb-4">Наши работы</h3>
-            <div class="text-center">
-                <img class="img-fluid mx-auto d-block" :src="current" alt="Responsive image">
-                <div class="btn-group btn-group-sm pt-3" role="group" aria-label="Просмотр изображений">
-                    <button type="button" class="btn btn-success" title="Предыдущая" :disabled="!prev" @click="prev()">
-                        <i class="icon-left-open"></i>
-                    </button>
-                    <button type="button" class="btn btn-success" title="Посмотреть в Instagram" :disabled="!current">
-                        <i class="icon-eye"></i>
-                    </button>
-                    <button type="button" class="btn btn-success" title="Следующая" :disabled="!next" @click="next()">
-                        <i class="icon-right-open"></i>
-                    </button>
+            <div id="carouselPortfolio" class="carousel slide" data-ride="carousel" data-interval="false">
+                <div class="carousel-inner">
+                    <template v-for="(image, index) in images">
+                        <div class="carousel-item" :class="{ 'active': index === 0 }">
+                            <img class="d-block w-100 img-thumbnail" :src="image" alt="First slide">
+                        </div>
+                    </template>
                 </div>
+                <a class="carousel-control-prev" href="#carouselPortfolio" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselPortfolio" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
         </div>
     </div>
