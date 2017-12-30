@@ -2,7 +2,7 @@ import { Request } from "express";
 import { IOutput } from "../http/outputs/IOutput";
 import { IRequest } from "../http/requests/IRequest";
 
-export class ReqHome implements IRequest {
+export class ReqGetHome implements IRequest {
     private out: IOutput;
 
     constructor(output: IOutput) {

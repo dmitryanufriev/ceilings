@@ -2,7 +2,7 @@ import * as express from "express";
 import * as http from "http";
 import * as path from "path";
 
-import { ReqHome } from "./home/ReqHome";
+import { ReqGetHome } from "./home/ReqGetHome";
 import { OutHtmlNunjucks } from "./http/outputs/OutHtmlNunjucks";
 import { RouteGet } from "./http/routing/RouteGet";
 import { Routes } from "./http/routing/Routes";
@@ -32,7 +32,7 @@ export class Application {
         this.routes = new Routes(
             new RouteGet(
                 Urls.Home,
-                new ReqHome(
+                new ReqGetHome(
                     new OutHtmlNunjucks(
                         "home/index.html"
                     )
