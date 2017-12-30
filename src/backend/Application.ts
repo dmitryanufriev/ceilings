@@ -4,15 +4,18 @@ import * as path from "path";
 
 import { ReqGetHome } from "./home/ReqGetHome";
 import { OutHtmlNunjucks } from "./http/outputs/OutHtmlNunjucks";
+import { OutJson } from "./http/outputs/OutJson";
 import { RouteGet } from "./http/routing/RouteGet";
 import { Routes } from "./http/routing/Routes";
+import { ReqGetPortfolio } from "./portfolio/ReqGetPortfolio";
 import { ISettings } from "./settings/ISettings";
 import { SettingsManual } from "./settings/SettingsManual";
 import { SettingsNunjucks } from "./settings/SettingsNunjucks";
 import { SettingsStaticResources } from "./settings/SettingsStaticResources";
 
 enum Urls {
-    Home = "/"
+    Home = "/",
+    Portfolio = "/portfolio"
 }
 
 export class Application {
@@ -36,6 +39,12 @@ export class Application {
                     new OutHtmlNunjucks(
                         "home/index.html"
                     )
+                )
+            ),
+            new RouteGet(
+                Urls.Portfolio,
+                new ReqGetPortfolio(
+                    new OutJson()
                 )
             )
         );
