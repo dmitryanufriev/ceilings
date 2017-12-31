@@ -1,8 +1,9 @@
 var Vue = require("vue");
 var axios = require("axios");
+var socialLikes = require("social-likes-next").default;
 
 var portfolio = new Vue({
-    el: "#carouselPortfolio",
+    el: "#portfolio",
     data: function() {
         return {
             images: []

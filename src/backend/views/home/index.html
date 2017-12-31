@@ -23,7 +23,7 @@
             </button>
         </div>
     </div>
-    <div id="portfolio" class="row">
+    <div id="portfolio" class="row mb-4">
         <div class="col-sm">
             <div class="row">
                 <div class="col-sm">
@@ -31,8 +31,8 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="col-md"></div>
-                <div class="col-sm col-md-10">
+                <!-- <div class="col-md"></div> -->
+                <div class="col-sm">
                     <div id="carouselPortfolio" class="carousel slide" data-ride="carousel" data-interval="false">
                         <div class="carousel-inner bg-dark rounded">
                             <template v-for="(image, index) in images">
@@ -53,7 +53,12 @@
                             <span class="sr-only">Следующая</span>
                         </a>
                     </div>
-                    <div class="social-likes">
+                    <!-- <div class="card">
+                        <div class="card-body">
+                            <small>Рассказать друзьям</small>
+                        </div>
+                    </div> -->
+                    <!-- <div class="social-share">
                         <span class="text-secondary">
                             <small>Рассказать друзьям:</small>
                         </span>
@@ -63,9 +68,28 @@
                         <div data-service="vkontakte" title="Рассказать во ВКонтакте">
                             <i class="icon-vkontakte-rect"></i>
                         </div>
+                    </div> -->
+                </div>
+                <!-- <div class="col-md"></div> -->
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <div class="social-share d-flex justify-content-between align-items-center border rounded p-2">
+                        <span class="text-secondary">Расскажите друзьям</span>
+                        <ul class="list-inline mb-0">
+                            <li class="list-inline-item">
+                                <button class="btn-social-share facebook">
+                                    <i class="icon-facebook-rect"></i>
+                                </button>
+                            </li>
+                            <li class="list-inline-item">
+                                <button class="btn-social-share vkontakte">
+                                    <i class="icon-vkontakte-rect"></i>
+                                </button>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div class="col-md"></div>
             </div>
         </div>
     </div>

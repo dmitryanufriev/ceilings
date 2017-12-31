@@ -3,12 +3,23 @@
 @vkontakte-color: #45668e;
 
 #portfolio {
-    button {
-        cursor: pointer;
-    }
+    .social-share {
+        .btn-social-share {
+            padding: 0;
+            font-size: 1.3rem;
+            cursor: pointer;
+            outline: none;
+            border: none;
+            background-color: transparent;
+        }
 
-    button:disabled {
-        cursor: not-allowed;
+        .btn-social-share.facebook {
+            color: @facebook-color;
+        }
+
+        .btn-social-share.vkontakte {
+            color: @vkontakte-color;
+        }
     }
 
     .view-on-instagram {
