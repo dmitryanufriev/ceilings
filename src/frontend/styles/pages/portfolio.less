@@ -1,4 +1,6 @@
 @background-color-dark: #343a40;
+@facebook-color: #3b5998;
+@vkontakte-color: #45668e;
 
 #portfolio {
     button {
@@ -17,9 +19,58 @@
         background-color: fadeout(@background-color-dark, 50%);
         outline: none;
 
-        .icon-instagram {
+        i {
             color: #ffffff;
-            font-size: 2.5rem;
+            font-size: 2rem;
+        }
+    }
+
+    .social-likes {
+        margin: 0;
+        align-items: center;
+        justify-content: right;
+        font-family: inherit;
+
+        .social-likes__icon {
+            display: none;
+        }
+
+        .social-likes__button {
+            font-size: 1.3rem;
+            padding: 0;
+
+            &:active {
+                background-color: transparent;
+            }
+
+            &:focus {
+                background-color: transparent;
+            }
+        }
+
+        .social-likes__widget {
+            border: none;
+
+            &:active {
+                background-color: transparent;
+            }
+
+            &:focus {
+                background-color: transparent;
+            }
+        }
+
+        .social-likes__widget_facebook {
+            color: @facebook-color;
+        }
+
+        .social-likes__widget_vkontakte {
+            color: @vkontakte-color;
+        }
+
+        .social-likes__widget_facebook:hover,
+        .social-likes__widget_vkontakte:hover {
+            background-color: transparent;
         }
     }
 }

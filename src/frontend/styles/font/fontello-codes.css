@@ -3,6 +3,7 @@
 .icon-left-open:before { content: '\e801'; } /* '' */
 .icon-right-open:before { content: '\e802'; } /* '' */
 .icon-eye:before { content: '\e803'; } /* '' */
-.icon-facebook-circled:before { content: '\f30d'; } /* '' */
-.icon-instagram:before { content: '\f32d'; } /* '' */
-.icon-vkontakte:before { content: '\f354'; } /* '' */
+.icon-facebook-rect:before { content: '\f301'; } /* '' */
+.icon-vkontakte-rect:before { content: '\f30a'; } /* '' */
+.icon-instagram-2:before { content: '\f31e'; } /* '' */
+.icon-instagram-filled:before { content: '\f31f'; } /* '' */

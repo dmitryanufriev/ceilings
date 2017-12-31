@@ -2,7 +2,7 @@ var Vue = require("vue");
 var axios = require("axios");
 
 var portfolio = new Vue({
-    el: "#portfolio",
+    el: "#carouselPortfolio",
     data: function() {
         return {
             images: []

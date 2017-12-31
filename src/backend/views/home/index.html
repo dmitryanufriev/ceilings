@@ -39,7 +39,7 @@
                                 <div class="carousel-item" :class="{ 'active': index === 0 }">
                                     <img class="d-block img-fluid mx-auto" :src="image.src">
                                     <a :href="image.href" target="_blank" class="view-on-instagram w-100" title="Посмотреть в Instagram">
-                                        <i class="icon-instagram rounded"></i>
+                                        <i class="icon-instagram-2"></i>
                                     </a>
                                 </div>
                             </template>
@@ -52,6 +52,17 @@
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="sr-only">Следующая</span>
                         </a>
+                    </div>
+                    <div class="social-likes">
+                        <span class="text-secondary">
+                            <small>Рассказать друзьям:</small>
+                        </span>
+                        <div data-service="facebook" title="Share link on Facebook">
+                            <i class="icon-facebook-rect"></i>
+                        </div>
+                        <div data-service="vkontakte" title="Share link on Vkontakte">
+                            <i class="icon-vkontakte-rect"></i>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md"></div>
@@ -73,17 +84,17 @@
             <ul class="social-networks list-inline mb-0">
                 <li class="list-inline-item">
                     <a href="#" class="icon-link instagram" title="Instagram">
-                        <i class="icon-instagram"></i>
+                        <i class="icon-instagram-filled"></i>
                     </a>
                 </li>
                 <li class="list-inline-item">
                     <a href="#" class="icon-link facebook" title="Facebook">
-                        <i class="icon-facebook-circled"></i>
+                        <i class="icon-facebook-rect"></i>
                     </a>
                 </li>
                 <li class="list-inline-item">
                     <a href="#" class="icon-link vkontakte" title="VKontakte">
-                        <i class="icon-vkontakte"></i>
+                        <i class="icon-vkontakte-rect"></i>
                     </a>
                 </li>
             </ul>
