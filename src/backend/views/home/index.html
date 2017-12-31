@@ -34,7 +34,7 @@
                 <div class="col-md"></div>
                 <div class="col-sm col-md-10">
                     <div id="carouselPortfolio" class="carousel slide" data-ride="carousel" data-interval="false">
-                        <div class="carousel-inner bg-dark">
+                        <div class="carousel-inner bg-dark rounded">
                             <template v-for="(image, index) in images">
                                 <div class="carousel-item" :class="{ 'active': index === 0 }">
                                     <img class="d-block img-fluid mx-auto" :src="image.src">
@@ -57,10 +57,10 @@
                         <span class="text-secondary">
                             <small>Рассказать друзьям:</small>
                         </span>
-                        <div data-service="facebook" title="Share link on Facebook">
+                        <div data-service="facebook" title="Рассказать на Facebook">
                             <i class="icon-facebook-rect"></i>
                         </div>
-                        <div data-service="vkontakte" title="Share link on Vkontakte">
+                        <div data-service="vkontakte" title="Рассказать во ВКонтакте">
                             <i class="icon-vkontakte-rect"></i>
                         </div>
                     </div>
