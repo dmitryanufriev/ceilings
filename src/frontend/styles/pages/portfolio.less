@@ -1,3 +1,5 @@
+@background-color-dark: #343a40;
+
 #portfolio {
     button {
         cursor: pointer;
@@ -5,5 +7,19 @@
 
     button:disabled {
         cursor: not-allowed;
+    }
+
+    .view-on-instagram {
+        display: block;
+        position: absolute;
+        bottom: 0;
+        text-align: center;
+        background-color: fadeout(@background-color-dark, 50%);
+        outline: none;
+
+        .icon-instagram {
+            color: #ffffff;
+            font-size: 2.5rem;
+        }
     }
 }

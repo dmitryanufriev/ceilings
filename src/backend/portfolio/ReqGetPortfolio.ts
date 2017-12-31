@@ -1,6 +1,7 @@
 import { Request } from "express";
 import { IOutput } from "../http/outputs/IOutput";
 import { IRequest } from "../http/requests/IRequest";
+import { ImageInstagram } from "./instagram/ImageInstagram";
 import { ImagesInstagramRecent } from "./instagram/ImagesInstagramRecent";
 
 export class ReqGetPortfolio implements IRequest {
@@ -12,11 +13,15 @@ export class ReqGetPortfolio implements IRequest {
 
     public async output(req: Request): Promise<IOutput> {
         const recent = await new ImagesInstagramRecent(
-            "",
-            "standard_resolution"
+            ""
         ).images();
         return this.out.with({
-            images: recent
+            images: recent.map((img: ImageInstagram) => {
+                return {
+                    href: img.href(),
+                    src: img.src("standard_resolution")
+                };
+            })
         });
     }
 }

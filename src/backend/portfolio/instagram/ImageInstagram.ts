@@ -4,6 +4,8 @@ export class ImageInstagram {
     private apiImagesJson: any;
 
     constructor(id: string, href: string, apiImagesJson: any) {
+        this.imgId = id;
+        this.imgHref = href;
         this.apiImagesJson = apiImagesJson;
     }
 

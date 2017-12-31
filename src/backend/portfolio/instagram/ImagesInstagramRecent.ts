@@ -7,13 +7,12 @@ export class ImagesInstagramRecent {
     private accessToken: string;
     private resolution: string;
 
-    constructor(accessToken: string, resolution: string) {
+    constructor(accessToken: string) {
         this.axiosInstance = axios.default;
         this.accessToken = accessToken;
-        this.resolution = resolution;
     }
 
-    public async images(): Promise<string[]> {
+    public async images(): Promise<ImageInstagram[]> {
         const response = await this.axiosInstance.get(
             this.URL.replace("access_token=ACCESS-TOKEN", `access_token=${this.accessToken}`)
         );
@@ -25,7 +24,6 @@ export class ImagesInstagramRecent {
                         json.id,
                         json.link,
                         json.images
-                    ))
-                    .map((img: ImageInstagram) => img.src(this.resolution));
+                    ));
     }
 }
