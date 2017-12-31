@@ -29,8 +29,12 @@ gulp.task("backend:compile:ts", function() {
     return tsResult.js.pipe(gulp.dest("./dist"));
 });
 
-gulp.task("backend:views:copy", function() {
+gulp.task("backend:copy:views", function() {
     gulp.src("./src/backend/views/**/*").pipe(gulp.dest("./dist/views"));
+});
+
+gulp.task("backend:copy:configuration", function() {
+    gulp.src("./src/backend/config/*.json").pipe(gulp.dest("./dist/config"));
 });
 
 /* Frontend */
@@ -79,7 +83,8 @@ gulp.task("frontend:compile:js", function() {
 gulp.task("default", [
     "backend:lint:ts",
     "backend:compile:ts",
-    "backend:views:copy",
+    "backend:copy:views",
+    "backend:copy:configuration",
     "frontend:compile:less",
     "frontend:compile:js",
     "frontend:font:copy",

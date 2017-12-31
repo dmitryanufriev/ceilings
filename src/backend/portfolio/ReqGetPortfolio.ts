@@ -5,16 +5,16 @@ import { ImageInstagram } from "./instagram/ImageInstagram";
 import { ImagesInstagramRecent } from "./instagram/ImagesInstagramRecent";
 
 export class ReqGetPortfolio implements IRequest {
+    private images: ImagesInstagramRecent;
     private out: IOutput;
 
-    constructor(output: IOutput) {
+    constructor(images: ImagesInstagramRecent, output: IOutput) {
+        this.images = images;
         this.out = output;
     }
 
     public async output(req: Request): Promise<IOutput> {
-        const recent = await new ImagesInstagramRecent(
-            ""
-        ).images();
+        const recent = await this.images.images();
         return this.out.with({
             images: recent.map((img: ImageInstagram) => {
                 return {
