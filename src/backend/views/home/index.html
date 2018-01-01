@@ -3,29 +3,69 @@
 <!--  Content  -->
 {% block content %}
 <div class="container-fluid h-100">
+
     <!-- Home -->
+
     <div id="home" class="row h-100">
-        <div class="col-sm">
-            <div class="row h-100">
-                <div class="col-sm d-flex flex-column pb-4">
-                    <div class="title">
-                        <h1 class="text-center">
-                            Натяжные потолки
-                            <span style="display: block;">
-                                от Жени
-                            </span>
-                        </h1>
-                    </div>
-                    <p class="align-self-center mb-auto mt-auto">
-                        <a href="#" class="callme">
-                            +7 (912) 6386238
-                        </a>
-                    </p>
-                    <button type="button" class="btn btn-success btn-lg align-self-center mt-auto">
-                        Перезвоните мне
+        <div class="col-sm blackout d-flex flex-column justify-content-between pt-4">
+            <!-- Site title -->
+            <div class="row">
+                <div class="col-sm text-center">
+                    <h1 class="site-title">Натяжные потолки от Жени</h1>
+                </div>
+            </div>
+            <!-- Phone -->
+            <div class="row">
+                <div class="col-sm text-center">
+                    <a href="#" class="phone">+7 (912) 6386238</a>
+                </div>
+            </div>
+            <!-- Back call -->
+            <div class="row">
+                <div class="col-sm text-center">
+                    <button type="button" class="back-call btn btn-success btn-lg">
+                        <i class="icon-phone"></i>
+                        Обратный звонок
                     </button>
                 </div>
             </div>
+            <!-- Navigation menu -->
+            <div class="row">
+                <div class="col-sm">
+                    <ul class="nav-menu list-inline">
+                        <li class="list-inline-item">
+                            <a href="#" class="nav-menu-link">О нас</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" class="nav-menu-link">Наши работы</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" class="nav-menu-link">Контакты</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!--            <div class="row h-100">
+                            <div class="col-sm">
+                                <div class="title">
+                                    <h1 class="text-center">
+                                        Натяжные потолки
+                                        <span style="display: block;">
+                                            от Жени
+                                        </span>
+                                    </h1>
+                                </div>
+                                <p class="align-self-center mb-auto mt-auto">
+                                    <a href="#" class="callme">
+                                        +7 (912) 6386238
+                                    </a>
+                                </p>
+                                <button type="button" class="btn btn-success btn-lg align-self-center mt-auto">
+                                    Перезвоните мне
+                                </button>
+                            </div>
+                        </div>-->
         </div>
     </div>
     <!-- Portfolio -->
@@ -58,12 +98,12 @@
                 <span class="text-secondary">Расскажите друзьям</span>
                 <ul class="list-inline mb-0">
                     <li class="list-inline-item">
-                        <button class="btn-social-share facebook">
+                        <button class="btn-social-share facebook" title="на Facebook">
                             <i class="icon-facebook-rect"></i>
                         </button>
                     </li>
                     <li class="list-inline-item">
-                        <button class="btn-social-share vkontakte">
+                        <button class="btn-social-share vkontakte" title="во ВКонтакте">
                             <i class="icon-vkontakte-rect"></i>
                         </button>
                     </li>
@@ -86,7 +126,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <p class="text-secondary">Звоните:</p>
-                    <p><a href="tel:+79126386238">+7 (912) 6386238</a></p>
+                    <p class="mb-0"><a href="tel:+79126386238">+7 (912) 6386238</a></p>
                     <ul class="messengers list-inline">
                         <li class="list-inline-item">
                             <a href="#" class="icon-link whatsapp" title="Whatsapp">
