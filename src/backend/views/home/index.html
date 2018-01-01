@@ -41,10 +41,10 @@
                             <a href="#" class="nav-menu-link">О нас</a>
                         </li>
                         <li class="list-inline-item">
-                            <a href="#" class="nav-menu-link">Наши работы</a>
+                            <a href="#portfolio" class="nav-menu-link" @click="scrollToPage">Наши работы</a>
                         </li>
                         <li class="list-inline-item">
-                            <a href="#" class="nav-menu-link">Контакты</a>
+                            <a href="#contacts" class="nav-menu-link" @click="scrollToPage">Контакты</a>
                         </li>
                     </ul>
                 </div>
@@ -57,7 +57,11 @@
     <div id="portfolio" class="row py-4">
         <div class="col-md-3"></div>
         <div class="col-sm col-md-6">
+
+            <!-- Page title -->
             <h3 class="mb-4">Наши работы</h3>
+
+            <!-- Photos carousel -->
             <div id="carouselPortfolio" class="carousel slide mb-4" data-ride="carousel" data-interval="false">
                 <div class="carousel-inner bg-dark rounded">
                     <template v-for="(image, index) in images">
@@ -79,7 +83,9 @@
                     <span class="sr-only">Следующая</span>
                 </a>
             </div>
-            <div class="social-share d-flex justify-content-between align-items-center border rounded p-2">
+
+            <!-- Social share -->
+            <div class="social-share d-flex justify-content-between align-items-center border rounded p-2 mb-3">
                 <span class="text-secondary">Расскажите друзьям</span>
                 <ul class="list-inline mb-0">
                     <li class="list-inline-item">
@@ -94,6 +100,9 @@
                     </li>
                 </ul>
             </div>
+
+            <!-- Top -->
+            <a href="#home" class="scroll-top" @click="scrollToPage">Наверх</a>
         </div>
         <div class="col-md-3"></div>
     </div>
