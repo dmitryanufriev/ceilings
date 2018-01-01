@@ -1,25 +1,55 @@
-@instagram-color: #bc2a8d;
-@facebook-color: #3b5998;
-@vkontakte-color: #45668e;
+@color-instagram: #bc2a8d;
+@color-facebook: #3b5998;
+@color-vkontakte: #45668e;
+@color-whatsapp: #25D366;
+@color-telegram: #0088cc;
 
-.social-networks {
-    .icon-link {
-        font-size: x-large;
+#contacts {
+    .social-networks {
+        .icon-link {
+            font-size: x-large;
 
-        i.icon-instagram:before {
+            i.icon-instagram:before {
+                margin-left: 0;
+            }
+        }
+    }
+
+    .messengers {
+        .icon-link {
+            font-size: 34px;
+        }
+
+        .icon-whatsapp {
+            font-size: 40px;
+        }
+
+        .icon-whatsapp:before {
             margin-left: 0;
         }
     }
 
+    a.icon-link {
+        text-decoration: none;
+    }
+
+    .icon-link.whatsapp {
+        color: @color-whatsapp;
+    }
+
+    .icon-link.telegram {
+        color: @color-telegram;
+    }
+
     .icon-link.instagram {
-        color: @instagram-color;
+        color: @color-instagram;
     }
 
     .icon-link.facebook {
-        color: @facebook-color;
+        color: @color-facebook;
     }
 
     .icon-link.vkontakte {
-        color: @vkontakte-color;
+        color: @color-vkontakte;
     }
 }

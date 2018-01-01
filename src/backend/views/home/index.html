@@ -38,7 +38,8 @@
                     <template v-for="(image, index) in images">
                         <div class="carousel-item" :class="{ 'active': index === 0 }">
                             <img class="d-block w-75 mx-auto" :src="image.src">
-                            <a :href="image.href" target="_blank" class="view-on-instagram w-100" title="Посмотреть в Instagram">
+                            <a :href="image.href" target="_blank" class="view-on-instagram w-100"
+                               title="Посмотреть в Instagram">
                                 <i class="icon-instagram-2"></i>
                             </a>
                         </div>
@@ -71,7 +72,9 @@
         </div>
         <div class="col-md-3"></div>
     </div>
+
     <!-- Contacts -->
+
     <div id="contacts" class="row py-4 bg-light border border-right-0 border-left-0 border-bottom-0">
         <div class="col-md-3"></div>
         <div class="col-sm col-md-6">
@@ -83,9 +86,17 @@
             <div class="row">
                 <div class="col-sm-6">
                     <p class="text-secondary">Звоните:</p>
-                    <p>
-                        <a href="tel:+79126386238">+7 (912) 6386238</a>
-                    </p>
+                    <p><a href="tel:+79126386238">+7 (912) 6386238</a></p>
+                    <ul class="messengers list-inline">
+                        <li class="list-inline-item">
+                            <a href="#" class="icon-link whatsapp" title="Whatsapp">
+                                <i class="icon-whatsapp"></i>
+                            </a>
+                            <a href="#" class="icon-link telegram" title="Telegram">
+                                <i class="icon-telegram"></i>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
                 <div class="col-sm-6 text-sm-right">
                     <p class="text-secondary">Пишите:</p>

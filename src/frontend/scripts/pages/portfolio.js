@@ -4,20 +4,20 @@ var socialLikes = require("social-likes-next").default;
 
 var portfolio = new Vue({
     el: "#portfolio",
-    data: function() {
+    data: function () {
         return {
             images: []
         };
     },
-    created: function() {
+    created: function () {
         var self = this;
         axios.get("/portfolio").then(
-            function(response) {
+            function (response) {
                 for (var i = 0; i < response.data.images.length; i++) {
                     self.images.push(response.data.images[i]);
                 }
             },
-            function(response) {
+            function (response) {
                 // error callback
                 // console.error(response.body);
             }
