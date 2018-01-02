@@ -26,7 +26,7 @@
             <!-- Back call -->
             <div class="row">
                 <div class="col-sm text-center">
-                    <button type="button" class="back-call btn btn-success btn-lg">
+                    <button type="button" class="back-call btn btn-success btn-lg" @click="backCall('modalBackCall')">
                         <i class="icon-phone"></i>
                         Обратный звонок
                     </button>
@@ -175,6 +175,72 @@
             </p>
         </div>
         <div class="col-md-3"></div>
+    </div>
+
+    <!-- Back call modal -->
+    <div id="modalBackCall" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalBackCallTitle">Обратный звонок</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form @submit="send" novalidate>
+                        <div class="form-group">
+                            <label for="phone">Номер телефона</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">+7</div>
+                                </div>
+                                <input id="phone" required
+                                       v-model="form.fields.phone"
+                                       @blur="validatePhone"
+                                       type="tel"
+                                       data-inputmask="'mask': '(999) 9999999', 'showMaskOnHover': 'false'"
+                                       class="form-control"
+                                       :class="{'is-invalid': form.errors.phone}"
+                                       placeholder="10 цифр"
+                                       aria-describedby="phoneHelp">
+                            </div>
+                            <small v-if="!form.errors.phone" id="phoneHelp" class="form-text text-muted">
+                                Номер телефона по которому мы Вам можем перезвонить.
+                            </small>
+                            <div v-if="form.errors.phone" class="invalid-feedback">
+                                Пожалуйста, укажите 10 цифр номера телефона.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Контактное лицо</label>
+                            <input id="name"
+                                   v-model="form.fields.name"
+                                   type="text"
+                                   class="form-control"
+                                   placeholder="Как к Вам можно обращаться?">
+                        </div>
+                        <div class="form-group">
+                            <label for="time">В какое время лучше перезвонить?</label>
+                            <input id="time"
+                                   v-model="form.fields.time"
+                                   type="text"
+                                   data-inputmask="'mask': 'с 99:99 до 99:99', 'showMaskOnHover': 'false'"
+                                   class="form-control"
+                                   placeholder="Например, с 10:00 до 12:00"
+                                   aria-describedby="timeHelp">
+                            <small id="timeHelp" class="form-text text-muted">
+                                Это поле можно оставить пустым и тогда администратор свяжется с Вами в ближайшее время.
+                            </small>
+                        </div>
+                        <div class="submit d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary justify-self-center">Отправить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
