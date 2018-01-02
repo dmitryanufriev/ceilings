@@ -28,12 +28,14 @@ var scrollToPageMixin = {
     }
 };
 
+var bus = new Vue();
+
 var homePage = new Vue({
     el: "#home",
     mixins: [scrollToPageMixin],
     methods: {
         backCall: function (modalId) {
-            $("#" + modalId).modal("toggle");
+            bus.$emit("back-call:show")
         }
     }
 });
@@ -64,8 +66,20 @@ var portfolioPage = new Vue({
 
 var backCallModal = new Vue({
     el: "#modalBackCall",
+    created: function () {
+        var self = this;
+        bus.$on("back-call:show", function () {
+            self.toggle.call(self);
+        });
+    },
+    mounted: function () {
+        Inputmask().mask(
+            this.$el.getElementsByTagName("input")
+        );
+    },
     data: function () {
         return {
+            shown: false,
             form: {
                 fields: {
                     phone: "",
@@ -97,6 +111,10 @@ var backCallModal = new Vue({
         }
     },
     methods: {
+        toggle: function () {
+            this.form.errors.phone = false;
+            $(this.$el).modal("toggle");
+        },
         validate: function () {
             this.validatePhone();
         },
@@ -109,13 +127,10 @@ var backCallModal = new Vue({
             this.validate();
             if (this.hasErrors)
                 return;
+            this.toggle();
             console.log("Please, call me");
             console.log(this.form.fields.phone);
             $(this.$el).modal("toggle");
         }
     }
-});
-
-$(document).ready(function () {
-    Inputmask().mask(document.querySelectorAll("input"));
 });
