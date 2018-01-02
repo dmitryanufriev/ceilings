@@ -130,7 +130,6 @@ var backCallModal = new Vue({
             this.toggle();
             console.log("Please, call me");
             console.log(this.form.fields.phone);
-            $(this.$el).modal("toggle");
         }
     }
 });
