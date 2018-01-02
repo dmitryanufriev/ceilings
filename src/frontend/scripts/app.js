@@ -128,8 +128,6 @@ var backCallModal = new Vue({
             if (this.hasErrors)
                 return;
             this.toggle();
-            console.log("Please, call me");
-            console.log(this.form.fields.phone);
         }
     }
 });

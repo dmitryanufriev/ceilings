@@ -21,6 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.17.1",
+    "body-parser": "^1.18.2",
     "config": "^1.29.0",
     "express": "^4.16.2",
     "inputmask": "^3.3.11",
@@ -29,6 +30,7 @@
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
+    "@types/body-parser": "^1.16.8",
     "@types/config": "0.0.33",
     "@types/express": "^4.11.0",
     "@types/nunjucks": "^3.0.0",
