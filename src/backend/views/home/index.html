@@ -178,6 +178,7 @@
     </div>
 
     <!-- Back call modal -->
+
     <div id="modalBackCall" class="modal fade" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalCenterTitle"
          aria-hidden="true">
@@ -243,5 +244,18 @@
             </div>
         </div>
     </div>
+
+    <!-- Notification -->
+
+    {% raw %}
+    <div id="notification" class="alert alert-success" :class="{'show': visible}" role="alert">
+        <h4 class="alert-heading" v-if="title">{{ title }}</h4>
+        <p class="mb-2">{{ text }}</p>
+        <button type="button" class="close" aria-label="Close" @click="close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endraw %}
+
 </div>
 {% endblock %}

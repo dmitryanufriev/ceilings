@@ -133,10 +133,50 @@ var backCallModal = new Vue({
                 name: this.name,
                 time: this.time
             }).then(function (response) {
-                console.log("Success!");
+                bus.$emit("notify:success", {
+                    title: "Спасибо!",
+                    text: "Заявка на обратный звонок отправлена. Наш администратор свяжется с Вами в указанное или ближайшее время."
+                });
             }).catch(function (error) {
                 console.log("Fail...");
             });
+        }
+    }
+});
+
+var notification = new Vue({
+    el: "#notification",
+    created: function () {
+        var self = this;
+        bus.$on("notify:success", function (notification) {
+            self.success.call(self, notification);
+        });
+    },
+    data: function () {
+        return {
+            timer: undefined,
+            visible: false,
+            title: "",
+            text: ""
+        };
+    },
+    methods: {
+        open: function () {
+            var self = this;
+            self.visible = true;
+            self.timer = setTimeout(function () {
+                self.visible = false;
+            }, 5000);
+        },
+        close: function () {
+            clearTimeout(this.timer);
+            this.visible = false;
+        },
+        success: function (notification) {
+            var self = this;
+            self.title = notification.title || "";
+            self.text = notification.text || "";
+            self.open();
         }
     }
 });
