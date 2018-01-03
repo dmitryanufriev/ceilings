@@ -132,7 +132,7 @@ var backCallModal = new Vue({
                 phone: this.phone,
                 name: this.name,
                 time: this.time
-            }).then(function (response) {
+            }).then(function () {
                 bus.$emit("notify:success", {
                     title: "Спасибо!",
                     text: "Заявка на обратный звонок отправлена. Наш администратор свяжется с Вами в указанное или ближайшее время."

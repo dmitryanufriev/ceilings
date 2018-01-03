@@ -2,9 +2,15 @@
     visibility: hidden;
     position: fixed;
     top: 30px;
-    left: .5rem;
-    right: .5rem;
+    left: 0.5rem;
+    right: 0.5rem;
     z-index: 1000;
+
+    // Medium devices (tablets, 768px and up)
+    @media (min-width: 768px) {
+        left: 50%;
+        transform: translateX(-50%);
+    }
 
     &.show {
         visibility: visible;
@@ -14,7 +20,7 @@
 
     .close {
         position: absolute;
-        top: .5rem;
+        top: 0.5rem;
         right: 1rem;
     }
 }
