@@ -1,6 +1,5 @@
 import * as axios from "axios";
 import { IConfiguration } from "../configuration/IConfiguration";
-import { ValuePathViaDots } from "../configuration/ValuePathViaDots";
 import { ImageInstagram } from "./ImageInstagram";
 
 export class ImagesInstagramRecent {
@@ -16,8 +15,7 @@ export class ImagesInstagramRecent {
 
     public async images(): Promise<ImageInstagram[]> {
         const accessToken = this.configuration.value(
-            new ValuePathViaDots("Instagram.accessToken"),
-            "unknown"
+            "Instagram.accessToken"
         );
         const response = await this.axiosInstance.get(
             this.URL.replace("access_token=ACCESS-TOKEN", `access_token=${accessToken}`)

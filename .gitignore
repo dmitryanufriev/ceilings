@@ -1,6 +1,6 @@
 .idea/
 node_modules/
+config/development.json
+config/production.json
 dist/
 package-lock.json
-src/backend/config/development.json
-src/backend/config/production.json

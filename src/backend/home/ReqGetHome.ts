@@ -1,6 +1,5 @@
 import { Request } from "express";
 import { IConfiguration } from "../configuration/IConfiguration";
-import { ValuePathViaDots } from "../configuration/ValuePathViaDots";
 import { IOutput } from "../http/outputs/IOutput";
 import { IRequest } from "../http/requests/IRequest";
 import { ImageInstagram } from "../instagram/ImageInstagram";
@@ -21,20 +20,16 @@ export class ReqGetHome implements IRequest {
         const recent = await this.images.images();
         return this.out.with({
             Facebook: this.configuration.value(
-                new ValuePathViaDots("Contacts.Social.Facebook"),
-                "default"
+                "Contacts.Social.Facebook"
             ),
             Instagram: this.configuration.value(
-                new ValuePathViaDots("Contacts.Social.Instagram"),
-                "default"
+                "Contacts.Social.Instagram"
             ),
             VKontakte: this.configuration.value(
-                new ValuePathViaDots("Contacts.Social.VKontakte"),
-                "default"
+                "Contacts.Social.VKontakte"
             ),
             email: this.configuration.value(
-                new ValuePathViaDots("Contacts.email"),
-                "default"
+                "Contacts.email"
             ),
             images: recent.map((img: ImageInstagram) => {
                 return {
@@ -43,8 +38,7 @@ export class ReqGetHome implements IRequest {
                 };
             }),
             phone: this.configuration.value(
-                new ValuePathViaDots("Contacts.phone"),
-                "default"
+                "Contacts.phone"
             )
         });
     }
