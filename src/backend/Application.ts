@@ -12,7 +12,6 @@ import {RouteGet} from "./http/routing/RouteGet";
 import {RoutePost} from "./http/routing/RoutePost";
 import {Routes} from "./http/routing/Routes";
 import {ImagesInstagramRecent} from "./instagram/ImagesInstagramRecent";
-import {ReqGetPortfolio} from "./portfolio/ReqGetPortfolio";
 import {ISettings} from "./settings/ISettings";
 import {SettingsManual} from "./settings/SettingsManual";
 import {SettingsNunjucks} from "./settings/SettingsNunjucks";
@@ -48,20 +47,14 @@ export class Application {
                     new ConfigurationFiles(
                         path.join(__dirname, "config")
                     ),
-                    new OutHtmlNunjucks(
-                        "home/index.html"
-                    )
-                )
-            ),
-            new RouteGet(
-                Urls.Portfolio,
-                new ReqGetPortfolio(
                     new ImagesInstagramRecent(
                         new ConfigurationFiles(
                             path.join(__dirname, "config")
                         )
                     ),
-                    new OutJson()
+                    new OutHtmlNunjucks(
+                        "home/index.html"
+                    )
                 )
             ),
             new RoutePost(

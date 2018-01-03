@@ -47,26 +47,7 @@ var homePage = new Vue({
 
 var portfolioPage = new Vue({
     el: "#portfolio",
-    mixins: [scrollToPageMixin],
-    data: function() {
-        return {
-            images: []
-        };
-    },
-    created: function() {
-        var self = this;
-        axios.get("/portfolio").then(
-            function(response) {
-                for (var i = 0; i < response.data.images.length; i++) {
-                    self.images.push(response.data.images[i]);
-                }
-            },
-            function(response) {
-                // error callback
-                // console.error(response.body);
-            }
-        );
-    }
+    mixins: [scrollToPageMixin]
 });
 
 var backCallModal = new Vue({
