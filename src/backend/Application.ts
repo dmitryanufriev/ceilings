@@ -4,6 +4,7 @@ import * as path from "path";
 
 import {RequestPostBackcall} from "./backcall/RequestPostBackcall";
 import { Configuration } from "./configuration/Configuration";
+import { ConfigurationSection } from "./configuration/ConfigurationSection";
 import {ReqGetHome} from "./home/ReqGetHome";
 import {OutHtmlNunjucks} from "./http/outputs/OutHtmlNunjucks";
 import {OutJson} from "./http/outputs/OutJson";
@@ -44,9 +45,15 @@ export class Application {
             new RouteGet(
                 Urls.Home,
                 new ReqGetHome(
-                    new Configuration(),
-                    new ImagesInstagramRecent(
+                    new ConfigurationSection(
+                        "Contacts",
                         new Configuration()
+                    ),
+                    new ImagesInstagramRecent(
+                        new ConfigurationSection(
+                            "Instagram",
+                            new Configuration()
+                        )
                     ),
                     new OutHtmlNunjucks(
                         "home/index.html"

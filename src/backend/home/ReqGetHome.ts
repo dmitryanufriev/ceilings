@@ -6,12 +6,12 @@ import { ImageInstagram } from "../instagram/ImageInstagram";
 import { ImagesInstagramRecent } from "../instagram/ImagesInstagramRecent";
 
 export class ReqGetHome implements IRequest {
-    private configuration: IConfiguration;
+    private contacts: IConfiguration;
     private images: ImagesInstagramRecent;
     private out: IOutput;
 
-    constructor(configuration: IConfiguration, images: ImagesInstagramRecent, output: IOutput) {
-        this.configuration = configuration;
+    constructor(contacts: IConfiguration, images: ImagesInstagramRecent, output: IOutput) {
+        this.contacts = contacts;
         this.images = images;
         this.out = output;
     }
@@ -19,17 +19,17 @@ export class ReqGetHome implements IRequest {
     public async output(req: Request): Promise<IOutput> {
         const recent = await this.images.images();
         return this.out.with({
-            Facebook: this.configuration.value(
-                "Contacts.Social.Facebook"
+            Facebook: this.contacts.value(
+                "Social.Facebook"
             ),
-            Instagram: this.configuration.value(
-                "Contacts.Social.Instagram"
+            Instagram: this.contacts.value(
+                "Social.Instagram"
             ),
-            VKontakte: this.configuration.value(
-                "Contacts.Social.VKontakte"
+            VKontakte: this.contacts.value(
+                "Social.VKontakte"
             ),
-            email: this.configuration.value(
-                "Contacts.email"
+            email: this.contacts.value(
+                "email"
             ),
             images: recent.map((img: ImageInstagram) => {
                 return {
@@ -37,8 +37,8 @@ export class ReqGetHome implements IRequest {
                     src: img.src("standard_resolution")
                 };
             }),
-            phone: this.configuration.value(
-                "Contacts.phone"
+            phone: this.contacts.value(
+                "phone"
             )
         });
     }

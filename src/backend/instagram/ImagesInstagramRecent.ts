@@ -5,17 +5,17 @@ import { ImageInstagram } from "./ImageInstagram";
 export class ImagesInstagramRecent {
     private URL = "https://api.instagram.com/v1/users/self/media/recent/?access_token=ACCESS-TOKEN";
     private axiosInstance: axios.AxiosStatic;
-    private configuration: IConfiguration;
+    private instagram: IConfiguration;
     private resolution: string;
 
-    constructor(configuration: IConfiguration) {
+    constructor(instagram: IConfiguration) {
         this.axiosInstance = axios.default;
-        this.configuration = configuration;
+        this.instagram = instagram;
     }
 
     public async images(): Promise<ImageInstagram[]> {
-        const accessToken = this.configuration.value(
-            "Instagram.accessToken"
+        const accessToken = this.instagram.value(
+            "accessToken"
         );
         const response = await this.axiosInstance.get(
             this.URL.replace("access_token=ACCESS-TOKEN", `access_token=${accessToken}`)
