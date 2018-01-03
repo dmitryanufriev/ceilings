@@ -110,7 +110,7 @@ var backCallModal = new Vue({
             if (this.hasErrors) return;
             this.toggle();
             axios
-                .post("/backcall", {
+                .post("/", {
                     phone: this.phone,
                     name: this.name,
                     time: this.time

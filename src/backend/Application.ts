@@ -23,8 +23,7 @@ import {SettingsSecuredCookies} from "./settings/SettingsSecuredCookies";
 import {SettingsStaticResources} from "./settings/SettingsStaticResources";
 
 enum Urls {
-    Home = "/",
-    Backcall = "/backcall"
+    Home = "/"
 }
 
 export class Application {
@@ -73,7 +72,7 @@ export class Application {
                 )
             ),
             new RoutePost(
-                Urls.Backcall,
+                Urls.Home,
                 new ActCsrfProtected(
                     new CsrfTokens(
                         new Configuration(
