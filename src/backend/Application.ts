@@ -2,16 +2,16 @@ import * as express from "express";
 import * as http from "http";
 import * as path from "path";
 
-import {RequestPostBackcall} from "./backcall/RequestPostBackcall";
-import { Configuration } from "./configuration/Configuration";
-import { ConfigurationSection } from "./configuration/ConfigurationSection";
-import {ReqGetHome} from "./home/ReqGetHome";
-import {OutHtmlNunjucks} from "./http/outputs/OutHtmlNunjucks";
-import {OutJson} from "./http/outputs/OutJson";
-import {OutRedirectToInternalUrl} from "./http/outputs/OutRedirectToInternalUrl";
-import {RouteGet} from "./http/routing/RouteGet";
-import {RoutePost} from "./http/routing/RoutePost";
-import {Routes} from "./http/routing/Routes";
+import {ActGetHome} from "./actions/ActGetHome";
+import {ActPostBackcall} from "./actions/ActPostBackcall";
+import {OutHtmlNunjucks} from "./application/outputs/OutHtmlNunjucks";
+import {OutJson} from "./application/outputs/OutJson";
+import {OutRedirectToInternalUrl} from "./application/outputs/OutRedirectToInternalUrl";
+import {RouteGet} from "./application/routing/RouteGet";
+import {RoutePost} from "./application/routing/RoutePost";
+import {Routes} from "./application/routing/Routes";
+import {Configuration} from "./configuration/Configuration";
+import {ConfigurationSection} from "./configuration/ConfigurationSection";
 import {ImagesInstagramRecent} from "./instagram/ImagesInstagramRecent";
 import {ISettings} from "./settings/ISettings";
 import {SettingsManual} from "./settings/SettingsManual";
@@ -21,7 +21,6 @@ import {SettingsStaticResources} from "./settings/SettingsStaticResources";
 
 enum Urls {
     Home = "/",
-    Portfolio = "/portfolio",
     Backcall = "/backcall"
 }
 
@@ -44,7 +43,7 @@ export class Application {
         this.routes = new Routes(
             new RouteGet(
                 Urls.Home,
-                new ReqGetHome(
+                new ActGetHome(
                     new ConfigurationSection(
                         "Contacts",
                         new Configuration()
@@ -62,7 +61,7 @@ export class Application {
             ),
             new RoutePost(
                 Urls.Backcall,
-                new RequestPostBackcall(
+                new ActPostBackcall(
                     new OutRedirectToInternalUrl(
                         Urls.Home
                     )

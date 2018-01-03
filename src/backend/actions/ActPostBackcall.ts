@@ -1,8 +1,8 @@
 import {Request} from "express";
-import {IOutput} from "../http/outputs/IOutput";
-import {IRequest} from "../http/requests/IRequest";
+import {IActionAsync} from "../application/actions/IActionAsync";
+import {IOutput} from "../application/outputs/IOutput";
 
-export class RequestPostBackcall implements IRequest {
+export class ActPostBackcall implements IActionAsync {
     private out: IOutput;
 
     constructor(output: IOutput) {

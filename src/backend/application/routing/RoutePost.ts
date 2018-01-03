@@ -1,12 +1,12 @@
 import {Request, Response, Router} from "express";
-import {IRequest} from "../requests/IRequest";
+import {IActionAsync} from "../actions/IActionAsync";
 import {IRoute} from "./IRoute";
 
 export class RoutePost implements IRoute {
     private url: string;
-    private request: IRequest;
+    private request: IActionAsync;
 
-    constructor(url: string, request: IRequest) {
+    constructor(url: string, request: IActionAsync) {
         this.url = url;
         this.request = request;
     }

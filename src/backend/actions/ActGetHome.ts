@@ -1,11 +1,11 @@
 import { Request } from "express";
+import { IActionAsync } from "../application/actions/IActionAsync";
+import { IOutput } from "../application/outputs/IOutput";
 import { IConfiguration } from "../configuration/IConfiguration";
-import { IOutput } from "../http/outputs/IOutput";
-import { IRequest } from "../http/requests/IRequest";
 import { ImageInstagram } from "../instagram/ImageInstagram";
 import { ImagesInstagramRecent } from "../instagram/ImagesInstagramRecent";
 
-export class ReqGetHome implements IRequest {
+export class ActGetHome implements IActionAsync {
     private contacts: IConfiguration;
     private images: ImagesInstagramRecent;
     private out: IOutput;

@@ -1,6 +1,6 @@
 import { Request } from "express";
 import { IOutput } from "../outputs/IOutput";
 
-export interface IRequest {
+export interface IActionAsync {
     output(req: Request): Promise<IOutput>;
 }
