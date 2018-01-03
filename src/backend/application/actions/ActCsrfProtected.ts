@@ -1,7 +1,7 @@
 import {Request} from "express";
-import {IActionAsync} from "../application/actions/IActionAsync";
-import {IOutput} from "../application/outputs/IOutput";
-import {CsrfTokens} from "../csrf/CsrfTokens";
+import {CsrfTokens} from "../../csrf/CsrfTokens";
+import {IOutput} from "../outputs/IOutput";
+import {IActionAsync} from "./IActionAsync";
 
 export class ActCsrfProtected implements IActionAsync {
     private tokens: CsrfTokens;

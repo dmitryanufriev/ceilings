@@ -2,9 +2,9 @@ import * as express from "express";
 import * as http from "http";
 import * as path from "path";
 
-import {ActCsrfProtected} from "./actions/ActCsrfProtected";
 import {ActGetHome} from "./actions/ActGetHome";
 import {ActPostBackcall} from "./actions/ActPostBackcall";
+import {ActCsrfProtected} from "./application/actions/ActCsrfProtected";
 import {OutCookieCsrf} from "./application/outputs/OutCookieCsrf";
 import {OutForbidden} from "./application/outputs/OutForbidden";
 import {OutHtmlNunjucks} from "./application/outputs/OutHtmlNunjucks";
