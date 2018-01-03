@@ -4,14 +4,13 @@ import * as path from "path";
 
 import {ActGetHome} from "./actions/ActGetHome";
 import {ActPostBackcall} from "./actions/ActPostBackcall";
+import {OutCookieCsrf} from "./application/outputs/OutCookieCsrf";
 import {OutHtmlNunjucks} from "./application/outputs/OutHtmlNunjucks";
-import {OutJson} from "./application/outputs/OutJson";
 import {OutRedirectToInternalUrl} from "./application/outputs/OutRedirectToInternalUrl";
 import {RouteGet} from "./application/routing/RouteGet";
 import {RoutePost} from "./application/routing/RoutePost";
 import {Routes} from "./application/routing/Routes";
 import {Configuration} from "./configuration/Configuration";
-import {ConfigurationSection} from "./configuration/ConfigurationSection";
 import {ImagesInstagramRecent} from "./instagram/ImagesInstagramRecent";
 import {ISettings} from "./settings/ISettings";
 import {SettingsManual} from "./settings/SettingsManual";
@@ -44,18 +43,21 @@ export class Application {
             new RouteGet(
                 Urls.Home,
                 new ActGetHome(
-                    new ConfigurationSection(
-                        "Contacts",
-                        new Configuration()
+                    new Configuration(
+                        "Contacts"
                     ),
                     new ImagesInstagramRecent(
-                        new ConfigurationSection(
-                            "Instagram",
-                            new Configuration()
+                        new Configuration(
+                            "Instagram"
                         )
                     ),
-                    new OutHtmlNunjucks(
-                        "home/index.html"
+                    new OutCookieCsrf(
+                        new Configuration(
+                            "Server.Security"
+                        ),
+                        new OutHtmlNunjucks(
+                            "home/index.html"
+                        )
                     )
                 )
             ),

@@ -33,9 +33,6 @@ gulp.task("backend:copy:views", function() {
     gulp.src("./src/backend/views/**/*").pipe(gulp.dest("./dist/views"));
 });
 
-gulp.task("backend:copy:configuration", function() {
-    gulp.src("./src/backend/config/*.json").pipe(gulp.dest("./dist/config"));
-});
 
 /* Frontend */
 
@@ -84,7 +81,6 @@ gulp.task("default", [
     "backend:lint:ts",
     "backend:compile:ts",
     "backend:copy:views",
-    "backend:copy:configuration",
     "frontend:compile:less",
     "frontend:compile:js",
     "frontend:font:copy",

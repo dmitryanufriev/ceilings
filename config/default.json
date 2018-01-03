@@ -10,5 +10,10 @@
             "Facebook": "#",
             "VKontakte": "#"
         }
+    },
+    "Server": {
+        "Security": {
+            "secret": ""
+        }
     }
 }
