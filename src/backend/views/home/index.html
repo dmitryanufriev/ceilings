@@ -67,8 +67,7 @@
                     <template v-for="(image, index) in images">
                         <div class="carousel-item" :class="{ 'active': index === 0 }">
                             <img class="d-block w-75 mx-auto" :src="image.src">
-                            <a :href="image.href" target="_blank" class="view-on-instagram w-100"
-                               title="Посмотреть в Instagram">
+                            <a :href="image.href" target="_blank" class="view-on-instagram w-100" title="Посмотреть в Instagram">
                                 <i class="icon-instagram-2"></i>
                             </a>
                         </div>
@@ -120,7 +119,9 @@
             <div class="row">
                 <div class="col-sm-6">
                     <p class="text-secondary">Звоните:</p>
-                    <p class="mb-0"><a href="tel:+79126386238">+7 (912) 6386238</a></p>
+                    <p class="mb-0">
+                        <a href="tel:+79126386238">+7 (912) 6386238</a>
+                    </p>
                     <ul class="messengers list-inline">
                         <li class="list-inline-item">
                             <a href="#" class="icon-link whatsapp" title="Whatsapp">
@@ -179,9 +180,7 @@
 
     <!-- Back call modal -->
 
-    <div id="modalBackCall" class="modal fade" tabindex="-1" role="dialog"
-         aria-labelledby="exampleModalCenterTitle"
-         aria-hidden="true">
+    <div id="modalBackCall" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -198,15 +197,8 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">+7</div>
                                 </div>
-                                <input id="phone" required
-                                       v-model="form.fields.phone"
-                                       @blur="validatePhone"
-                                       type="tel"
-                                       data-inputmask="'mask': '(999) 9999999', 'showMaskOnHover': 'false'"
-                                       class="form-control"
-                                       :class="{'is-invalid': form.errors.phone}"
-                                       placeholder="10 цифр"
-                                       aria-describedby="phoneHelp">
+                                <input id="phone" required v-model="form.fields.phone" @blur="validatePhone" type="tel" data-inputmask="'mask': '(999) 9999999', 'showMaskOnHover': 'false'"
+                                    class="form-control" :class="{'is-invalid': form.errors.phone}" placeholder="10 цифр" aria-describedby="phoneHelp">
                             </div>
                             <small v-if="!form.errors.phone" id="phoneHelp" class="form-text text-muted">
                                 Номер телефона по которому мы Вам можем перезвонить.
@@ -217,21 +209,12 @@
                         </div>
                         <div class="form-group">
                             <label for="name">Контактное лицо</label>
-                            <input id="name"
-                                   v-model="form.fields.name"
-                                   type="text"
-                                   class="form-control"
-                                   placeholder="Как к Вам можно обращаться?">
+                            <input id="name" v-model="form.fields.name" type="text" class="form-control" placeholder="Как к Вам можно обращаться?">
                         </div>
                         <div class="form-group">
                             <label for="time">В какое время лучше перезвонить?</label>
-                            <input id="time"
-                                   v-model="form.fields.time"
-                                   type="text"
-                                   data-inputmask="'mask': 'с 99:99 до 99:99', 'showMaskOnHover': 'false'"
-                                   class="form-control"
-                                   placeholder="Например, с 10:00 до 12:00"
-                                   aria-describedby="timeHelp">
+                            <input id="time" v-model="form.fields.time" type="text" data-inputmask="'mask': 'с 99:99 до 99:99', 'showMaskOnHover': 'false'"
+                                class="form-control" placeholder="Например, с 10:00 до 12:00" aria-describedby="timeHelp">
                             <small id="timeHelp" class="form-text text-muted">
                                 Это поле можно оставить пустым и тогда администратор свяжется с Вами в ближайшее время.
                             </small>
@@ -248,7 +231,7 @@
     <!-- Notification -->
 
     {% raw %}
-    <div id="notification" class="alert alert-success" :class="{'show': visible}" role="alert">
+    <div id="notification" class="alert" :class="{'show': visible, 'alert-success': type === 'success', 'alert-danger': type === 'error'}" role="alert">
         <h4 class="alert-heading" v-if="title">{{ title }}</h4>
         <p class="mb-2">{{ text }}</p>
         <button type="button" class="close" aria-label="Close" @click="close">
