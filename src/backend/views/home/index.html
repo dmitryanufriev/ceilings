@@ -19,7 +19,7 @@
             <!-- Phone -->
             <div class="row">
                 <div class="col-sm text-center">
-                    <a href="#" class="phone">+7 (912) 6386238</a>
+                    <a href="tel:{{ phone }}" class="phone">{{ phone }}</a>
                 </div>
             </div>
 
@@ -120,7 +120,7 @@
                 <div class="col-sm-6">
                     <p class="text-secondary">Звоните:</p>
                     <p class="mb-0">
-                        <a href="tel:+79126386238">+7 (912) 6386238</a>
+                        <a href="tel:{{ phone }}">{{ phone }}</a>
                     </p>
                     <ul class="messengers list-inline">
                         <li class="list-inline-item">
@@ -136,22 +136,22 @@
                 <div class="col-sm-6 text-sm-right">
                     <p class="text-secondary">Пишите:</p>
                     <p>
-                        <a href="mailto:dmitryanufriev@gmail.com">dmitryanufriev@gmail.com</a>
+                        <a href="mailto:{{ email }}">{{ email }}</a>
                     </p>
                     <p class="text-secondary">Подписывайтесь:</p>
                     <ul class="social-networks list-inline mb-0">
                         <li class="list-inline-item">
-                            <a href="#" class="icon-link instagram" title="Instagram">
+                            <a href="{{ Instagram }}" class="icon-link instagram" title="Instagram">
                                 <i class="icon-instagram-filled"></i>
                             </a>
                         </li>
                         <li class="list-inline-item">
-                            <a href="#" class="icon-link facebook" title="Facebook">
+                            <a href="{{ Facebook }}" class="icon-link facebook" title="Facebook">
                                 <i class="icon-facebook-rect"></i>
                             </a>
                         </li>
                         <li class="list-inline-item">
-                            <a href="#" class="icon-link vkontakte" title="VKontakte">
+                            <a href="{{ VKontakte }}" class="icon-link vkontakte" title="VKontakte">
                                 <i class="icon-vkontakte-rect"></i>
                             </a>
                         </li>
@@ -179,7 +179,7 @@
     </div>
 
     <!-- Back call modal -->
-
+    {% raw %}
     <div id="modalBackCall" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -227,6 +227,7 @@
             </div>
         </div>
     </div>
+    {% endraw %}
 
     <!-- Notification -->
 

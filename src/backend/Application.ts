@@ -3,6 +3,7 @@ import * as http from "http";
 import * as path from "path";
 
 import {RequestPostBackcall} from "./backcall/RequestPostBackcall";
+import { ConfigurationFiles } from "./configuration/ConfigurationFiles";
 import {InstagramConfiguration} from "./configuration/InstagramConfiguration";
 import {ReqGetHome} from "./home/ReqGetHome";
 import {OutHtmlNunjucks} from "./http/outputs/OutHtmlNunjucks";
@@ -45,6 +46,9 @@ export class Application {
             new RouteGet(
                 Urls.Home,
                 new ReqGetHome(
+                    new ConfigurationFiles(
+                        path.join(__dirname, "config")
+                    ),
                     new OutHtmlNunjucks(
                         "home/index.html"
                     )

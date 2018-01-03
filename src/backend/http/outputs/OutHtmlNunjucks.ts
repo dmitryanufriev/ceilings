@@ -12,7 +12,7 @@ export class OutHtmlNunjucks implements IOutput {
     }
 
     public with(values: any): IOutput {
-        return new OutHtmlNunjucks(this.template, this.values);
+        return new OutHtmlNunjucks(this.template, values);
     }
 
     public write(res: Response): void {

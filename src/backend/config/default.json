@@ -1,5 +1,14 @@
 {
     "Instagram": {
         "accessToken": ""
+    },
+    "Contacts": {
+        "phone": "",
+        "email": "",
+        "Social": {
+            "Instagram": "#",
+            "Facebook": "#",
+            "VKontakte": "#"
+        }
     }
 }
