@@ -1,20 +1,19 @@
-import Tokens = require("csrf");
 import {Response} from "express";
-import {IConfiguration} from "../../configuration/IConfiguration";
+import {CsrfTokens} from "../../csrf/CsrfTokens";
 import {IOutput} from "./IOutput";
 
 export class OutCookieCsrf implements IOutput {
-    private security: IConfiguration;
+    private tokens: CsrfTokens;
     private origin: IOutput;
 
-    constructor(security: IConfiguration, origin: IOutput) {
-        this.security = security;
+    constructor(tokens: CsrfTokens, origin: IOutput) {
+        this.tokens = tokens;
         this.origin = origin;
     }
 
     public with(values: any): IOutput {
         return new OutCookieCsrf(
-            this.security,
+            this.tokens,
             this.origin.with(
                 values
             )
@@ -22,17 +21,12 @@ export class OutCookieCsrf implements IOutput {
     }
 
     public write(res: Response): void {
-        res.cookie(
-            "csrf",
-            new Tokens().create(
-                this.security.value(
-                    "secret"
-                )
-            ), {
-                httpOnly: true,
-                maxAge: (1000 * 60) * 15, // (minutes) * count
-                signed: true
-            });
+        const options = {
+            httpOnly: true,
+            maxAge: (1000 * 60) * 15, // (minutes) * count
+            signed: true
+        };
+        res.cookie("csrf", this.tokens.token(), options);
         this.origin.write(res);
     }
 }

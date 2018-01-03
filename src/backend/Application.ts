@@ -2,15 +2,18 @@ import * as express from "express";
 import * as http from "http";
 import * as path from "path";
 
+import {ActCsrfProtected} from "./actions/ActCsrfProtected";
 import {ActGetHome} from "./actions/ActGetHome";
 import {ActPostBackcall} from "./actions/ActPostBackcall";
 import {OutCookieCsrf} from "./application/outputs/OutCookieCsrf";
+import {OutForbidden} from "./application/outputs/OutForbidden";
 import {OutHtmlNunjucks} from "./application/outputs/OutHtmlNunjucks";
-import {OutRedirectToInternalUrl} from "./application/outputs/OutRedirectToInternalUrl";
+import {OutNoContent} from "./application/outputs/OutNoContent";
 import {RouteGet} from "./application/routing/RouteGet";
 import {RoutePost} from "./application/routing/RoutePost";
 import {Routes} from "./application/routing/Routes";
 import {Configuration} from "./configuration/Configuration";
+import {CsrfTokens} from "./csrf/CsrfTokens";
 import {ImagesInstagramRecent} from "./instagram/ImagesInstagramRecent";
 import {ISettings} from "./settings/ISettings";
 import {SettingsManual} from "./settings/SettingsManual";
@@ -58,8 +61,10 @@ export class Application {
                         )
                     ),
                     new OutCookieCsrf(
-                        new Configuration(
-                            "Server.Security"
+                        new CsrfTokens(
+                            new Configuration(
+                                "Server.Security"
+                            )
                         ),
                         new OutHtmlNunjucks(
                             "home/index.html"
@@ -69,9 +74,19 @@ export class Application {
             ),
             new RoutePost(
                 Urls.Backcall,
-                new ActPostBackcall(
-                    new OutRedirectToInternalUrl(
-                        Urls.Home
+                new ActCsrfProtected(
+                    new CsrfTokens(
+                        new Configuration(
+                            "Server.Security"
+                        )
+                    ),
+                    new ActPostBackcall(
+                        new OutNoContent(
+                            "Success"
+                        )
+                    ),
+                    new OutForbidden(
+                        "CSRF Failed: CSRF token missing or incorrect"
                     )
                 )
             )
