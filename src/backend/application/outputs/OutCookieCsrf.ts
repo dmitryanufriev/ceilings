@@ -22,13 +22,17 @@ export class OutCookieCsrf implements IOutput {
     }
 
     public write(res: Response): void {
-        console.log(
+        res.cookie(
+            "csrf",
             new Tokens().create(
                 this.security.value(
                     "secret"
                 )
-            )
-        );
+            ), {
+                httpOnly: true,
+                maxAge: (1000 * 60) * 15, // (minutes) * count
+                signed: true
+            });
         this.origin.write(res);
     }
 }
