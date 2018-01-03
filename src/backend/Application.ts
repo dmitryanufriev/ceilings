@@ -12,7 +12,7 @@ import {OutRedirectToInternalUrl} from "./http/outputs/OutRedirectToInternalUrl"
 import {RouteGet} from "./http/routing/RouteGet";
 import {RoutePost} from "./http/routing/RoutePost";
 import {Routes} from "./http/routing/Routes";
-import {ImagesInstagramRecent} from "./portfolio/instagram/ImagesInstagramRecent";
+import {ImagesInstagramRecent} from "./instagram/ImagesInstagramRecent";
 import {ReqGetPortfolio} from "./portfolio/ReqGetPortfolio";
 import {ISettings} from "./settings/ISettings";
 import {SettingsManual} from "./settings/SettingsManual";

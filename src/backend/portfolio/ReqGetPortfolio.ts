@@ -1,8 +1,8 @@
 import { Request } from "express";
 import { IOutput } from "../http/outputs/IOutput";
 import { IRequest } from "../http/requests/IRequest";
-import { ImageInstagram } from "./instagram/ImageInstagram";
-import { ImagesInstagramRecent } from "./instagram/ImagesInstagramRecent";
+import { ImageInstagram } from "../instagram/ImageInstagram";
+import { ImagesInstagramRecent } from "../instagram/ImagesInstagramRecent";
 
 export class ReqGetPortfolio implements IRequest {
     private images: ImagesInstagramRecent;

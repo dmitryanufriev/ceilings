@@ -1,5 +1,5 @@
 import * as axios from "axios";
-import { InstagramConfiguration } from "../../configuration/InstagramConfiguration";
+import { InstagramConfiguration } from "../configuration/InstagramConfiguration";
 import { ImageInstagram } from "./ImageInstagram";
 
 export class ImagesInstagramRecent {
