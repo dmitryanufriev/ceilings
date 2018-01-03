@@ -180,7 +180,7 @@ var notification = new Vue({
             self.text = notification.text || "";
             self.visible = true;
             self.timer = setTimeout(function() {
-                self.visible = false;
+                self.close.call(self);
             }, 5000);
         },
         close: function() {
