@@ -12,6 +12,7 @@
         }
     },
     "Server": {
+        "Admin": "",
         "Security": {
             "secret": ""
         }

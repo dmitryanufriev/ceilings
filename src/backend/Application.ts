@@ -81,6 +81,12 @@ export class Application {
                         )
                     ),
                     new ActHomePostBackcall(
+                        new Configuration(
+                            "Server"
+                        ),
+                        new Configuration(
+                            "Contacts"
+                        ),
                         new SmtpMailRu(
                             new Configuration(
                                 "Smtp.MailRu"

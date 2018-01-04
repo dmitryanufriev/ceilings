@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Натяжные потолки от Жени - Обратный звонок</title>
-    <style>
+    <style type="text/css">
 
         html, body {
-            background-color: #f8f9fa;
+            background: #f8f9fa;
             font-family: Arial, Helvetica, sans-serif;
             height: 100%;
             margin: 0;
@@ -30,35 +30,40 @@
         .content {
             display: block;
             margin: 0 auto;
-            background-color: #ffffff;
             min-width: 300px;
             max-width: 560px;
-            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12)
         }
 
         .content table {
             width: 100%;
+            border: 1px solid #e9ecef;
         }
 
         .content table caption {
             padding: 8px;
-            border-bottom: 1px solid #e9ecef;
+            margin-bottom: 8px;
+            border: 1px solid #e9ecef;
+            color: #ffffff;
+            background-color: #28a745;
+            font-weight: bold;
         }
 
         .content table td {
             padding: 8px;
+            background-color: #ffffff;
+            width: 50%;
         }
 
-        .content table td:nth-child(1) {
+        .content table td.head {
             font-weight: bold;
         }
 
-        .content table td:nth-child(2) {
+        .content table td.value {
             text-align: right;
         }
     </style>
 </head>
-<body>
+<body style="background: #f8f9fa; font-family: Arial, Helvetica, sans-serif; height: 100%; margin: 0; padding: 48px">
 <div class="container">
     <div class="v-center">
         <div class="content">
@@ -66,16 +71,16 @@
                 <table>
                     <caption>Перезвоните клиенту</caption>
                     <tr>
-                        <td>Телефон</td>
-                        <td>{{ phone }}</td>
+                        <td class="head">Телефон</td>
+                        <td class="value">{{ phone }}</td>
                     </tr>
                     <tr>
-                        <td>Контактное лицо</td>
-                        <td>{{ name }}</td>
+                        <td class="head">Контактное лицо</td>
+                        <td class="value">{{ name }}</td>
                     </tr>
                     <tr>
-                        <td>Время</td>
-                        <td>{{ time }}</td>
+                        <td class="head">Время</td>
+                        <td class="value">{{ time }}</td>
                     </tr>
                 </table>
             </div>

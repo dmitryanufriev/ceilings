@@ -1,19 +1,24 @@
 import {Request} from "express";
 import {IActionAsync} from "../application/actions/IActionAsync";
 import {IOutput} from "../application/outputs/IOutput";
+import {IConfiguration} from "../configuration/IConfiguration";
 import {EmailAddress} from "../smtp/EmailAddress";
 import {SmtpFrom} from "../smtp/message/fields/SmtpFrom";
-import {SmtpHtml} from "../smtp/message/fields/SmtpHtml";
+import {SmtpHtmlTemplate} from "../smtp/message/fields/SmtpHtmlTemplate";
 import {SmtpSubject} from "../smtp/message/fields/SmtpSubject";
 import {SmtpTo} from "../smtp/message/fields/SmtpTo";
 import {SmtpMessage} from "../smtp/message/SmtpMessage";
 import {ISmtpTransport} from "../smtp/transport/ISmtpTransport";
 
 export class ActHomePostBackcall implements IActionAsync {
+    private server: IConfiguration;
+    private contacts: IConfiguration;
     private smtp: ISmtpTransport;
     private out: IOutput;
 
-    constructor(smtp: ISmtpTransport, output: IOutput) {
+    constructor(server: IConfiguration, contacts: IConfiguration, smtp: ISmtpTransport, output: IOutput) {
+        this.server = server;
+        this.contacts = contacts;
         this.smtp = smtp;
         this.out = output;
     }
@@ -23,19 +28,21 @@ export class ActHomePostBackcall implements IActionAsync {
             new SmtpMessage(
                 new SmtpFrom(
                     new EmailAddress(
-                        "170981@bk.ru"
+                        this.contacts.value("email"),
+                        "Натяжные потолки от Жени"
                     )
                 ),
                 new SmtpTo(
                     new EmailAddress(
-                        "dmitryanufriev@gmail.com"
+                        this.server.value("Admin")
                     )
                 ),
                 new SmtpSubject(
-                    "Натяжные потолки от Жени - Обратный звонок"
+                    "Обратный звонок"
                 ),
-                new SmtpHtml(
-                    "<p>Simple html <strong>text</strong></p>"
+                new SmtpHtmlTemplate(
+                    "email/backcall.html",
+                    req.body
                 )
             )
         );
