@@ -5,7 +5,7 @@ import { IConfiguration } from "../configuration/IConfiguration";
 import { ImageInstagram } from "../instagram/ImageInstagram";
 import { ImagesInstagramRecent } from "../instagram/ImagesInstagramRecent";
 
-export class ActGetHome implements IActionAsync {
+export class ActHomeGet implements IActionAsync {
     private contacts: IConfiguration;
     private images: ImagesInstagramRecent;
     private out: IOutput;

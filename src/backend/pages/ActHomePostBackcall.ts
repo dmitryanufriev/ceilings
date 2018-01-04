@@ -2,7 +2,7 @@ import {Request} from "express";
 import {IActionAsync} from "../application/actions/IActionAsync";
 import {IOutput} from "../application/outputs/IOutput";
 
-export class ActPostBackcall implements IActionAsync {
+export class ActHomePostBackcall implements IActionAsync {
     private out: IOutput;
 
     constructor(output: IOutput) {

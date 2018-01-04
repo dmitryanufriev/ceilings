@@ -2,8 +2,6 @@ import * as express from "express";
 import * as http from "http";
 import * as path from "path";
 
-import {ActGetHome} from "./actions/ActGetHome";
-import {ActPostBackcall} from "./actions/ActPostBackcall";
 import {ActCsrfProtected} from "./application/actions/ActCsrfProtected";
 import {OutCookieCsrf} from "./application/outputs/OutCookieCsrf";
 import {OutForbidden} from "./application/outputs/OutForbidden";
@@ -15,6 +13,8 @@ import {Routes} from "./application/routing/Routes";
 import {Configuration} from "./configuration/Configuration";
 import {CsrfTokens} from "./csrf/CsrfTokens";
 import {ImagesInstagramRecent} from "./instagram/ImagesInstagramRecent";
+import {ActHomeGet} from "./pages/ActHomeGet";
+import {ActHomePostBackcall} from "./pages/ActHomePostBackcall";
 import {ISettings} from "./settings/ISettings";
 import {SettingsManual} from "./settings/SettingsManual";
 import {SettingsNunjucks} from "./settings/SettingsNunjucks";
@@ -50,7 +50,7 @@ export class Application {
         this.routes = new Routes(
             new RouteGet(
                 Urls.Home,
-                new ActGetHome(
+                new ActHomeGet(
                     new Configuration(
                         "Contacts"
                     ),
@@ -79,7 +79,7 @@ export class Application {
                             "Server.Security"
                         )
                     ),
-                    new ActPostBackcall(
+                    new ActHomePostBackcall(
                         new OutNoContent(
                             "Success"
                         )
