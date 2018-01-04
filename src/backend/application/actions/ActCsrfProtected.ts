@@ -8,7 +8,7 @@ export class ActCsrfProtected implements IActionAsync {
     private out: IOutput;
     private origin: IActionAsync;
 
-    constructor(tokens: CsrfTokens, origin: IActionAsync, output: IOutput) {
+    constructor(tokens: CsrfTokens, output: IOutput, origin: IActionAsync) {
         this.tokens = tokens;
         this.out = output;
         this.origin = origin;

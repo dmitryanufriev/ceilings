@@ -3,10 +3,12 @@ import * as http from "http";
 import * as path from "path";
 
 import {ActCsrfProtected} from "./application/actions/ActCsrfProtected";
+import {ActRequestBodyValidated} from "./application/actions/ActRequestBodyValidated";
 import {OutCookieCsrf} from "./application/outputs/OutCookieCsrf";
 import {OutForbidden} from "./application/outputs/OutForbidden";
 import {OutHtmlNunjucks} from "./application/outputs/OutHtmlNunjucks";
 import {OutNoContent} from "./application/outputs/OutNoContent";
+import {OutUnprocessableEntity} from "./application/outputs/OutUnprocessableEntity";
 import {RouteGet} from "./application/routing/RouteGet";
 import {RoutePost} from "./application/routing/RoutePost";
 import {Routes} from "./application/routing/Routes";
@@ -22,6 +24,9 @@ import {SettingsRequestBody} from "./settings/SettingsRequestBody";
 import {SettingsSecuredCookies} from "./settings/SettingsSecuredCookies";
 import {SettingsStaticResources} from "./settings/SettingsStaticResources";
 import {SmtpMailRu} from "./smtp/transport/SmtpMailRu";
+import {MaxLength} from "./validation/MaxLength";
+import {Required} from "./validation/Required";
+import {ValidationComposite} from "./validation/ValidationComposite";
 
 enum Urls {
     Home = "/"
@@ -80,24 +85,42 @@ export class Application {
                             "Server.Security"
                         )
                     ),
-                    new ActHomePostBackcall(
-                        new Configuration(
-                            "Server"
-                        ),
-                        new Configuration(
-                            "Contacts"
-                        ),
-                        new SmtpMailRu(
-                            new Configuration(
-                                "Smtp.MailRu"
-                            )
-                        ),
-                        new OutNoContent(
-                            "Success"
-                        )
-                    ),
                     new OutForbidden(
                         "CSRF Failed: CSRF token missing or incorrect"
+                    ),
+                    new ActRequestBodyValidated(
+                        new ValidationComposite(
+                            new Required(
+                                "phone"
+                            ),
+                            new MaxLength(
+                                "name",
+                                50
+                            ),
+                            new MaxLength(
+                                "time",
+                                50
+                            )
+                        ),
+                        new OutUnprocessableEntity(
+                            "Not valid"
+                        ),
+                        new ActHomePostBackcall(
+                            new Configuration(
+                                "Server"
+                            ),
+                            new Configuration(
+                                "Contacts"
+                            ),
+                            new SmtpMailRu(
+                                new Configuration(
+                                    "Smtp.MailRu"
+                                )
+                            ),
+                            new OutNoContent(
+                                "Success"
+                            )
+                        )
                     )
                 )
             )
