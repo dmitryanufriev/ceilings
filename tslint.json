@@ -4,6 +4,7 @@
         "curly": true,
         "triple-equals": true,
         "no-console": false,
+        "object-literal-sort-keys": false,
         "trailing-comma": [
             true,
             {
