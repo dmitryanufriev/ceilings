@@ -21,6 +21,7 @@ import {SettingsNunjucks} from "./settings/SettingsNunjucks";
 import {SettingsRequestBody} from "./settings/SettingsRequestBody";
 import {SettingsSecuredCookies} from "./settings/SettingsSecuredCookies";
 import {SettingsStaticResources} from "./settings/SettingsStaticResources";
+import {SmtpMailRu} from "./smtp/transport/SmtpMailRu";
 
 enum Urls {
     Home = "/"
@@ -80,6 +81,11 @@ export class Application {
                         )
                     ),
                     new ActHomePostBackcall(
+                        new SmtpMailRu(
+                            new Configuration(
+                                "Smtp.MailRu"
+                            )
+                        ),
                         new OutNoContent(
                             "Success"
                         )

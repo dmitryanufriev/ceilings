@@ -15,5 +15,12 @@
         "Security": {
             "secret": ""
         }
+    },
+    "Smtp": {
+        "MailRu": {
+            "Server": "smtp.mail.ru",
+            "User": "",
+            "Password": ""
+        }
     }
 }
