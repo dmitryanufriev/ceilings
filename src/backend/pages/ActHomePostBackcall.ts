@@ -3,8 +3,8 @@ import {IActionAsync} from "../application/actions/IActionAsync";
 import {IOutput} from "../application/outputs/IOutput";
 import {EmailAddress} from "../smtp/EmailAddress";
 import {SmtpFrom} from "../smtp/message/fields/SmtpFrom";
+import {SmtpHtml} from "../smtp/message/fields/SmtpHtml";
 import {SmtpSubject} from "../smtp/message/fields/SmtpSubject";
-import {SmtpText} from "../smtp/message/fields/SmtpText";
 import {SmtpTo} from "../smtp/message/fields/SmtpTo";
 import {SmtpMessage} from "../smtp/message/SmtpMessage";
 import {ISmtpTransport} from "../smtp/transport/ISmtpTransport";
@@ -34,8 +34,8 @@ export class ActHomePostBackcall implements IActionAsync {
                 new SmtpSubject(
                     "Натяжные потолки от Жени - Обратный звонок"
                 ),
-                new SmtpText(
-                    "Hello world!"
+                new SmtpHtml(
+                    "<p>Simple html <strong>text</strong></p>"
                 )
             )
         );
