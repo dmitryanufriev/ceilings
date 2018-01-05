@@ -48,24 +48,50 @@ var homePage = new Vue({
 var portfolioPage = new Vue({
     el: "#portfolio",
     mixins: [scrollToPageMixin],
+    computed: {
+        host: function () {
+            var parser = document.createElement('a');
+            parser.href = window.location.href;
+            return parser.protocol + "//" + parser.host;
+        }
+    },
     methods: {
+        openSharePopup: function (name, url) {
+            var width = 600;
+            var height = 400;
+            var windowLeft = window.screenLeft ? window.screenLeft : window.screenX;
+            var windowTop = window.screenTop ? window.screenTop : window.screenY;
+            var left = windowLeft + (window.innerWidth / 2) - (width / 2);
+            var top = windowTop + (window.innerHeight / 2) - (height / 2);
+            var shareWindow = window.open(
+                "https://www.facebook.com/sharer/sharer.php?u=" + url,
+                name,
+                "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=" + width + ', height=' + height + ', top=' + top + ', left=' + left
+            );
+            if (window.focus) {
+                shareWindow.focus();
+            }
+        },
+        shareUrl: function () {
+            var activePortfolioSlides = document.getElementsByClassName("carousel-item active");
+            if (activePortfolioSlides.length < 1)
+                return;
+            var portfolioImages = activePortfolioSlides[0].getElementsByTagName("img");
+            if (portfolioImages.length < 1)
+                return;
+            var imageSrc = portfolioImages[0].getAttribute("src");
+            if (!imageSrc)
+                return;
+            var regexp = /([^/]+)\.(\w+)$/g;
+            var matches = regexp.exec(imageSrc);
+            if (matches.length < 3)
+                return;
+            var imageName = matches[1];
+            var imageExt = matches[2];
+            return this.host + "/portfolio/" + imageExt + "/" + imageName;
+        },
         shareOnFacebook: function () {
-            console.log("Share on Facebook");
-            console.log(window.location.href);
-            // var width = 600;
-            // var height = 400;
-            // var windowLeft = window.screenLeft ? window.screenLeft : window.screenX;
-            // var windowTop = window.screenTop ? window.screenTop : window.screenY;
-            // var left = windowLeft + (window.innerWidth / 2) - (width / 2);
-            // var top = windowTop + (window.innerHeight / 2) - (height / 2);
-            // var facebookWindow = window.open(
-            //     "https://www.facebook.com/sharer/sharer.php?u=https://www.instagram.com/p/BdWnAY1Fl0-/",
-            //     "Share on Facebook",
-            //     "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=" + width + ', height=' + height + ', top=' + top + ', left=' + left
-            // );
-            // if (window.focus) {
-            //     facebookWindow.focus();
-            // }
+            this.openSharePopup("Share on Facebook", this.shareUrl());
         }
     }
 });
