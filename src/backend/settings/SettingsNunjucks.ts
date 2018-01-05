@@ -1,6 +1,6 @@
 import * as express from "express";
 import * as nunjucks from "nunjucks";
-import { ISettings } from "./ISettings";
+import {ISettings} from "./ISettings";
 
 export class SettingsNunjucks implements ISettings {
     private viewsPath: string;
@@ -13,8 +13,9 @@ export class SettingsNunjucks implements ISettings {
 
     public setUp(app: express.Application): void {
         this.origin.setUp(app);
-        nunjucks.configure(this.viewsPath, {
+        const env = nunjucks.configure(this.viewsPath, {
             autoescape: true
         });
+        env.addFilter("digits", (x: string) => x.match(/\d+/g).join(""));
     }
 }

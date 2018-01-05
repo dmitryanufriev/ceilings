@@ -19,7 +19,7 @@
             <!-- Phone -->
             <div class="row">
                 <div class="col-sm text-center">
-                    <a href="tel:{{ phone }}" class="phone">{{ phone }}</a>
+                    <a href="tel:{{ phone | digits }}" class="phone">{{ phone }}</a>
                 </div>
             </div>
 
@@ -121,11 +121,13 @@
                 <div class="col-sm-6">
                     <p class="text-secondary">Звоните:</p>
                     <p class="mb-0">
-                        <a href="tel:{{ phone }}">{{ phone }}</a>
+                        <a href="tel:{{ phone | digits }}">{{ phone }}</a>
                     </p>
                     <ul class="messengers list-inline">
                         <li class="list-inline-item">
-                            <a href="#" class="icon-link whatsapp" title="Whatsapp">
+                            <a href="https://api.whatsapp.com/send?phone={{ phone | digits }}"
+                               class="icon-link whatsapp"
+                               title="Whatsapp">
                                 <i class="icon-whatsapp"></i>
                             </a>
                             <a href="#" class="icon-link telegram" title="Telegram">

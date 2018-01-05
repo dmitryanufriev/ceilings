@@ -102,9 +102,7 @@ export class Application {
                                 50
                             )
                         ),
-                        new OutUnprocessableEntity(
-                            "Not valid"
-                        ),
+                        new OutUnprocessableEntity(),
                         new ActHomePostBackcall(
                             new Configuration(
                                 "Server"
