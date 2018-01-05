@@ -62,8 +62,8 @@
             <h3 class="mb-4">Наши работы</h3>
 
             <!-- Photos carousel -->
-            <div id="carouselPortfolio" class="carousel slide mb-4" data-ride="carousel" data-interval="false">
-                <div class="carousel-inner bg-dark rounded">
+            <div id="carouselPortfolio" class="carousel slide" data-ride="carousel" data-interval="false">
+                <div class="carousel-inner bg-dark rounded-top">
                     {% for image in images %}
                     <div class="carousel-item {{ 'active' if loop.first }}">
                         <img class="d-block w-75 mx-auto" src="{{ image.src }}">
@@ -85,11 +85,11 @@
             </div>
 
             <!-- Social share -->
-            <div class="social-share d-flex justify-content-between align-items-center border rounded p-2 mb-3">
+            <div class="social-share d-flex justify-content-between align-items-center bg-light border border-top-0 rounded-bottom py-2 px-2 mb-3">
                 <span class="text-secondary">Расскажите друзьям</span>
                 <ul class="list-inline mb-0">
                     <li class="list-inline-item">
-                        <button class="btn-social-share facebook" title="на Facebook">
+                        <button class="btn-social-share facebook" title="на Facebook" @click="shareOnFacebook">
                             <i class="icon-facebook-rect"></i>
                         </button>
                     </li>
