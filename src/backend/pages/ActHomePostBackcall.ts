@@ -42,11 +42,7 @@ export class ActHomePostBackcall implements IActionAsync {
                 ),
                 new SmtpHtmlTemplate(
                     "email/backcall.html",
-                    {
-                        phone: req.body.phone,
-                        name: req.body.name || "Не указано",
-                        time: req.body.time || "Ближайшее"
-                    }
+                    req.body
                 )
             )
         );

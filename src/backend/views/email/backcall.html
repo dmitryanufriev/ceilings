@@ -76,11 +76,11 @@
                     </tr>
                     <tr>
                         <td class="head">Контактное лицо</td>
-                        <td class="value">{{ name }}</td>
+                        <td class="value">{{ name | default("Не указано", true) }}</td>
                     </tr>
                     <tr>
                         <td class="head">Время</td>
-                        <td class="value">{{ time }}</td>
+                        <td class="value">{{ time | default("Ближайшее", true) }}</td>
                     </tr>
                 </table>
             </div>
