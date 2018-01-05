@@ -17,6 +17,7 @@ import {CsrfTokens} from "./csrf/CsrfTokens";
 import {ImagesInstagramRecent} from "./instagram/ImagesInstagramRecent";
 import {ActHomeGet} from "./pages/ActHomeGet";
 import {ActHomePostBackcall} from "./pages/ActHomePostBackcall";
+import {ActPortfolioGet} from "./pages/ActPortfolioGet";
 import {ISettings} from "./settings/ISettings";
 import {SettingsManual} from "./settings/SettingsManual";
 import {SettingsNunjucks} from "./settings/SettingsNunjucks";
@@ -119,6 +120,17 @@ export class Application {
                                 "Success"
                             )
                         )
+                    )
+                )
+            ),
+            new RouteGet(
+                "/portfolio/:ext/:name",
+                new ActPortfolioGet(
+                    new Configuration(
+                        "Contacts"
+                    ),
+                    new OutHtmlNunjucks(
+                        "portfolio/index.html"
                     )
                 )
             )
