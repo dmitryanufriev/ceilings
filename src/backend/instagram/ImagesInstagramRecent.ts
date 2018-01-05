@@ -26,12 +26,16 @@ export class ImagesInstagramRecent implements IImagesInstagram {
         return response
             .data
             .data
-            .filter((json: any) => json.type === "image")
-            .map((json: any) => new ImageInstagram(
-                json.id,
-                json.link,
-                this.resolution,
-                json.images
-            ));
+            .filter(
+                (json: any) => json.type === "image"
+            )
+            .map(
+                (json: any) => new ImageInstagram(
+                    json.id,
+                    json.link,
+                    this.resolution,
+                    json.images
+                )
+            );
     }
 }

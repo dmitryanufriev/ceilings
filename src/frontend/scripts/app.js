@@ -64,7 +64,7 @@ var portfolioPage = new Vue({
             var left = windowLeft + (window.innerWidth / 2) - (width / 2);
             var top = windowTop + (window.innerHeight / 2) - (height / 2);
             var shareWindow = window.open(
-                "https://www.facebook.com/sharer/sharer.php?u=" + url,
+                url,
                 name,
                 "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=" + width + ', height=' + height + ', top=' + top + ', left=' + left
             );
