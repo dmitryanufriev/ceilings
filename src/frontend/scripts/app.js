@@ -95,6 +95,12 @@ var portfolioPage = new Vue({
                 "Share on Facebook",
                 "https://www.facebook.com/sharer/sharer.php?u=" + this.shareUrl()
             );
+        },
+        shareOnVk: function () {
+            this.openSharePopup(
+                "Share on VK",
+                "https://vk.com/share.php?url=" + this.shareUrl()
+            );
         }
     }
 });
