@@ -91,7 +91,10 @@ var portfolioPage = new Vue({
             return this.host + "/portfolio/" + imageExt + "/" + imageName;
         },
         shareOnFacebook: function () {
-            this.openSharePopup("Share on Facebook", this.shareUrl());
+            this.openSharePopup(
+                "Share on Facebook",
+                "https://www.facebook.com/sharer/sharer.php?u=" + this.shareUrl()
+            );
         }
     }
 });
