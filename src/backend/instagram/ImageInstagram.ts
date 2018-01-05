@@ -1,11 +1,15 @@
-export class ImageInstagram {
+import {IImageInstagram} from "./IImageInstagram";
+
+export class ImageInstagram implements IImageInstagram {
     private imgId: string;
     private imgHref: string;
+    private imgResolution: string;
     private apiImagesJson: any;
 
-    constructor(id: string, href: string, apiImagesJson: any) {
+    constructor(id: string, href: string, resolution: string, apiImagesJson: any) {
         this.imgId = id;
         this.imgHref = href;
+        this.imgResolution = resolution;
         this.apiImagesJson = apiImagesJson;
     }
 
@@ -13,15 +17,11 @@ export class ImageInstagram {
         return this.imgId;
     }
 
-    public src(resolution: string): string {
-        return this.apiImagesJson[resolution].url;
+    public src(): string {
+        return this.apiImagesJson[this.imgResolution].url;
     }
 
     public href(): string {
         return this.imgHref;
-    }
-
-    public toString = (): string => {
-        return `<Instagram image (id: ${this.id()})}>`;
     }
 }

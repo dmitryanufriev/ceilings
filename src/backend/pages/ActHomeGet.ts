@@ -1,9 +1,9 @@
-import { Request } from "express";
-import { IActionAsync } from "../application/actions/IActionAsync";
-import { IOutput } from "../application/outputs/IOutput";
-import { IConfiguration } from "../configuration/IConfiguration";
-import { ImageInstagram } from "../instagram/ImageInstagram";
-import { ImagesInstagramRecent } from "../instagram/ImagesInstagramRecent";
+import {Request} from "express";
+import {IActionAsync} from "../application/actions/IActionAsync";
+import {IOutput} from "../application/outputs/IOutput";
+import {IConfiguration} from "../configuration/IConfiguration";
+import {ImageInstagram} from "../instagram/ImageInstagram";
+import {ImagesInstagramRecent} from "../instagram/ImagesInstagramRecent";
 
 export class ActHomeGet implements IActionAsync {
     private contacts: IConfiguration;
@@ -34,7 +34,7 @@ export class ActHomeGet implements IActionAsync {
             images: recent.map((img: ImageInstagram) => {
                 return {
                     href: img.href(),
-                    src: img.src("standard_resolution")
+                    src: img.src()
                 };
             }),
             phone: this.contacts.value(

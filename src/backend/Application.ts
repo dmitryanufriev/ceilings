@@ -64,7 +64,8 @@ export class Application {
                     new ImagesInstagramRecent(
                         new Configuration(
                             "Instagram"
-                        )
+                        ),
+                        "standard_resolution"
                     ),
                     new OutCookieCsrf(
                         new CsrfTokens(
@@ -128,6 +129,12 @@ export class Application {
                 new ActPortfolioGet(
                     new Configuration(
                         "Contacts"
+                    ),
+                    new ImagesInstagramRecent(
+                        new Configuration(
+                            "Instagram"
+                        ),
+                        "standard_resolution"
                     ),
                     new OutHtmlNunjucks(
                         "portfolio/index.html"
