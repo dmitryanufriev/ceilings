@@ -8,6 +8,7 @@ import {ActRequestBodyValidated} from "./application/actions/ActRequestBodyValid
 import {OutCookieCsrf} from "./application/outputs/OutCookieCsrf";
 import {OutHtmlNunjucks} from "./application/outputs/OutHtmlNunjucks";
 import {OutStatusForbidden} from "./application/outputs/OutStatusForbidden";
+import {OutStatusInternalServerError} from "./application/outputs/OutStatusInternalServerError";
 import {OutStatusNoContent} from "./application/outputs/OutStatusNoContent";
 import {OutStatusNotFound} from "./application/outputs/OutStatusNotFound";
 import {OutStatusUnprocessableEntity} from "./application/outputs/OutStatusUnprocessableEntity";
@@ -60,106 +61,109 @@ export class Application {
             )
         );
 
-        this.routes = new RoutesSafe(
-            new OutText("Error"),
-            new Routes(
-                new RouteGet(
-                    Urls.Home,
-                    new ActHomeGet(
-                        new Configuration(
-                            "Contacts"
-                        ),
-                        new ImagesInstagramRecent(
+        this.routes =
+            new RoutesSafe(
+                new OutStatusInternalServerError(
+                    new OutText("Internal Server Error")
+                ),
+                new Routes(
+                    new RouteGet(
+                        Urls.Home,
+                        new ActHomeGet(
                             new Configuration(
-                                "Instagram"
+                                "Contacts"
                             ),
-                            "standard_resolution"
-                        ),
-                        new OutCookieCsrf(
+                            new ImagesInstagramRecent(
+                                new Configuration(
+                                    "Instagram"
+                                ),
+                                "standard_resolution"
+                            ),
+                            new OutCookieCsrf(
+                                new CsrfTokens(
+                                    new Configuration(
+                                        "Server.Security"
+                                    )
+                                ),
+                                new OutHtmlNunjucks(
+                                    "home/index.html"
+                                )
+                            )
+                        )
+                    ),
+                    new RoutePost(
+                        Urls.Home,
+                        new ActCsrfProtected(
                             new CsrfTokens(
                                 new Configuration(
                                     "Server.Security"
                                 )
                             ),
-                            new OutHtmlNunjucks(
-                                "home/index.html"
-                            )
-                        )
-                    )
-                ),
-                new RoutePost(
-                    Urls.Home,
-                    new ActCsrfProtected(
-                        new CsrfTokens(
-                            new Configuration(
-                                "Server.Security"
-                            )
-                        ),
-                        new OutStatusForbidden(
-                            "CSRF Failed: CSRF token missing or incorrect"
-                        ),
-                        new ActRequestBodyValidated(
-                            new ValidationComposite(
-                                new Required(
-                                    "phone"
-                                ),
-                                new MaxLength(
-                                    "name",
-                                    50
-                                ),
-                                new MaxLength(
-                                    "time",
-                                    50
-                                )
+                            new OutStatusForbidden(
+                                "CSRF Failed: CSRF token missing or incorrect"
                             ),
-                            new OutStatusUnprocessableEntity(),
-                            new ActHomePostBackcall(
-                                new Configuration(
-                                    "Server"
-                                ),
-                                new Configuration(
-                                    "Contacts"
-                                ),
-                                new SmtpMailRu(
-                                    new Configuration(
-                                        "Smtp.MailRu"
+                            new ActRequestBodyValidated(
+                                new ValidationComposite(
+                                    new Required(
+                                        "phone"
+                                    ),
+                                    new MaxLength(
+                                        "name",
+                                        50
+                                    ),
+                                    new MaxLength(
+                                        "time",
+                                        50
                                     )
                                 ),
-                                new OutStatusNoContent(
-                                    "Success"
+                                new OutStatusUnprocessableEntity(),
+                                new ActHomePostBackcall(
+                                    new Configuration(
+                                        "Server"
+                                    ),
+                                    new Configuration(
+                                        "Contacts"
+                                    ),
+                                    new SmtpMailRu(
+                                        new Configuration(
+                                            "Smtp.MailRu"
+                                        )
+                                    ),
+                                    new OutStatusNoContent(
+                                        "Success"
+                                    )
                                 )
                             )
                         )
-                    )
-                ),
-                new RouteGet(
-                    "/portfolio/:ext/:name",
-                    new ActPortfolioGet(
-                        new Configuration(
-                            "Contacts"
-                        ),
-                        new ImagesInstagramRecent(
+                    ),
+                    new RouteGet(
+                        "/portfolio/:ext/:name",
+                        new ActPortfolioGet(
                             new Configuration(
-                                "Instagram"
+                                "Contacts"
                             ),
-                            "standard_resolution"
-                        ),
-                        new OutHtmlNunjucks(
-                            "portfolio/index.html"
-                        )
-                    )
-                ),
-                new RouteNotFound(
-                    new ActOutput(
-                        new OutStatusNotFound(
+                            new ImagesInstagramRecent(
+                                new Configuration(
+                                    "Instagram"
+                                ),
+                                "standard_resolution"
+                            ),
                             new OutHtmlNunjucks(
-                                "404.html"
+                                "portfolio/index.html"
+                            )
+                        )
+                    ),
+                    new RouteNotFound(
+                        new ActOutput(
+                            new OutStatusNotFound(
+                                new OutHtmlNunjucks(
+                                    "404.html"
+                                )
                             )
                         )
                     )
                 )
-            )
-        );
+            );
     }
 
     public run() {

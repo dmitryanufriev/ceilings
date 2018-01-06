@@ -12,9 +12,10 @@ export class RoutesSafe implements IRoutes {
     }
 
     public setUp(app: Application): void {
-        app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-            console.log(err);
-        });
         this.origin.setUp(app);
+        app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+            this.output.write(res);
+            next(err);
+        });
     }
 }

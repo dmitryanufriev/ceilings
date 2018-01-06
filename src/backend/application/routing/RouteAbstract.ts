@@ -1,4 +1,4 @@
-import {Request, Response, Router} from "express";
+import {NextFunction, Request, Response, Router} from "express";
 import {IActionAsync} from "../actions/IActionAsync";
 import {IRoute} from "./IRoute";
 
@@ -26,9 +26,13 @@ export abstract class RouteAbstract implements IRoute {
     }
 
     private writeOut() {
-        return async (req: Request, res: Response) => {
-            const out = await this.action.output(req);
-            out.write(res);
+        return async (req: Request, res: Response, next: NextFunction) => {
+            try {
+                const out = await this.action.output(req);
+                out.write(res);
+            } catch (e) {
+                next(e);
+            }
         };
     }
 }
