@@ -5,8 +5,9 @@ import * as path from "path";
 import {ActCsrfProtected} from "./application/actions/ActCsrfProtected";
 import {ActOutput} from "./application/actions/ActOutput";
 import {ActRequestBodyValidated} from "./application/actions/ActRequestBodyValidated";
+import {HtmlEngineNunjucks} from "./application/html/HtmlEngineNunjucks";
 import {OutCookieCsrf} from "./application/outputs/OutCookieCsrf";
-import {OutHtmlNunjucks} from "./application/outputs/OutHtmlNunjucks";
+import {OutHtml} from "./application/outputs/OutHtml";
 import {OutStatusForbidden} from "./application/outputs/OutStatusForbidden";
 import {OutStatusInternalServerError} from "./application/outputs/OutStatusInternalServerError";
 import {OutStatusNoContent} from "./application/outputs/OutStatusNoContent";
@@ -19,6 +20,7 @@ import {RoutePost} from "./application/routing/RoutePost";
 import {Routes} from "./application/routing/Routes";
 import {RoutesSafe} from "./application/routing/RoutesSafe";
 import {Configuration} from "./configuration/Configuration";
+import {ConfigurationComposite} from "./configuration/ConfigurationComposite";
 import {CsrfTokens} from "./csrf/CsrfTokens";
 import {ImagesInstagramRecent} from "./instagram/ImagesInstagramRecent";
 import {ActHomeGet} from "./pages/ActHomeGet";
@@ -63,8 +65,10 @@ export class Application {
         this.routes =
             new RoutesSafe(
                 new OutStatusInternalServerError(
-                    new OutHtmlNunjucks(
-                        "error/500.html"
+                    new OutHtml(
+                        new HtmlEngineNunjucks(
+                            "error/500.html"
+                        )
                     )
                 ),
                 new Routes(
@@ -86,8 +90,10 @@ export class Application {
                                         "Server.Security"
                                     )
                                 ),
-                                new OutHtmlNunjucks(
-                                    "home/index.html"
+                                new OutHtml(
+                                    new HtmlEngineNunjucks(
+                                        "home/index.html"
+                                    )
                                 )
                             )
                         )
@@ -119,11 +125,16 @@ export class Application {
                                 ),
                                 new OutStatusUnprocessableEntity(),
                                 new ActHomePostBackcall(
-                                    new Configuration(
-                                        "Server"
+                                    new ConfigurationComposite(
+                                        new Configuration(
+                                            "Server"
+                                        ),
+                                        new Configuration(
+                                            "Contacts"
+                                        )
                                     ),
-                                    new Configuration(
-                                        "Contacts"
+                                    new HtmlEngineNunjucks(
+                                        "email/backcall.html"
                                     ),
                                     new SmtpMailRu(
                                         new Configuration(
@@ -149,16 +160,20 @@ export class Application {
                                 ),
                                 "standard_resolution"
                             ),
-                            new OutHtmlNunjucks(
-                                "portfolio/index.html"
+                            new OutHtml(
+                                new HtmlEngineNunjucks(
+                                    "portfolio/index.html"
+                                )
                             )
                         )
                     ),
                     new RouteNotFound(
                         new ActOutput(
                             new OutStatusNotFound(
-                                new OutHtmlNunjucks(
-                                    "error/404.html"
+                                new OutHtml(
+                                    new HtmlEngineNunjucks(
+                                        "error/404.html"
+                                    )
                                 )
                             )
                         )

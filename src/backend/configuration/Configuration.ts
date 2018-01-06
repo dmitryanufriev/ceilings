@@ -14,6 +14,10 @@ export class Configuration implements IConfiguration {
             : new ConfigurationRoot();
     }
 
+    public has(path: string): boolean {
+        return this.origin.has(path);
+    }
+
     public value(path: string): any {
         return this.origin.value(path);
     }

@@ -1,15 +1,18 @@
+import {IHtmlEngine} from "../../../application/html/IHtmlEngine";
 import {ISmtpField} from "./ISmtpField";
 
 export class SmtpHtml implements ISmtpField {
-    private html: string;
+    private html: IHtmlEngine;
+    private values: any;
 
-    constructor(html: string) {
+    constructor(html: IHtmlEngine, values: any = {}) {
         this.html = html;
+        this.values = values;
     }
 
     public field(): any {
         return {
-            html: this.html
+            html: this.html.render(this.values)
         };
     }
 }
