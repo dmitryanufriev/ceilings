@@ -1,23 +1,13 @@
-import {Request, Response, Router} from "express";
+import {Router} from "express";
 import {IActionAsync} from "../actions/IActionAsync";
-import {IRoute} from "./IRoute";
+import {RouteAbstract} from "./RouteAbstract";
 
-export class RoutePost implements IRoute {
-    private url: string;
-    private request: IActionAsync;
-
-    constructor(url: string, request: IActionAsync) {
-        this.url = url;
-        this.request = request;
+export class RoutePost extends RouteAbstract {
+    constructor(url: string, action: IActionAsync) {
+        super(url, action);
     }
 
     public extend(router: Router): void {
-        const request = this.request;
-        router
-            .route(this.url)
-            .post(async (req: Request, res: Response) => {
-                const out = await request.output(req);
-                out.write(res);
-            });
+        super.post(router);
     }
 }

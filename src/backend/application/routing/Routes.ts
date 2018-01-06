@@ -1,7 +1,8 @@
-import { Application, Router } from "express";
-import { IRoute } from "./IRoute";
+import {Application, Router} from "express";
+import {IRoute} from "./IRoute";
+import {IRoutes} from "./IRoutes";
 
-export class Routes {
+export class Routes implements IRoutes {
     private routes: IRoute[];
 
     constructor(...routes: IRoute[]) {

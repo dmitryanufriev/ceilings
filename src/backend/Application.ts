@@ -11,10 +11,13 @@ import {OutStatusForbidden} from "./application/outputs/OutStatusForbidden";
 import {OutStatusNoContent} from "./application/outputs/OutStatusNoContent";
 import {OutStatusNotFound} from "./application/outputs/OutStatusNotFound";
 import {OutStatusUnprocessableEntity} from "./application/outputs/OutStatusUnprocessableEntity";
+import {OutText} from "./application/outputs/OutText";
+import {IRoutes} from "./application/routing/IRoutes";
 import {RouteGet} from "./application/routing/RouteGet";
 import {RouteNotFound} from "./application/routing/RouteNotFound";
 import {RoutePost} from "./application/routing/RoutePost";
 import {Routes} from "./application/routing/Routes";
+import {RoutesSafe} from "./application/routing/RoutesSafe";
 import {Configuration} from "./configuration/Configuration";
 import {CsrfTokens} from "./csrf/CsrfTokens";
 import {ImagesInstagramRecent} from "./instagram/ImagesInstagramRecent";
@@ -38,7 +41,7 @@ enum Urls {
 
 export class Application {
     private settings: ISettings;
-    private routes: Routes;
+    private routes: IRoutes;
 
     constructor() {
         this.settings = new SettingsRequestBody(
@@ -57,98 +60,101 @@ export class Application {
             )
         );
 
-        this.routes = new Routes(
-            new RouteGet(
-                Urls.Home,
-                new ActHomeGet(
-                    new Configuration(
-                        "Contacts"
-                    ),
-                    new ImagesInstagramRecent(
+        this.routes = new RoutesSafe(
+            new OutText("Error"),
+            new Routes(
+                new RouteGet(
+                    Urls.Home,
+                    new ActHomeGet(
                         new Configuration(
-                            "Instagram"
+                            "Contacts"
                         ),
-                        "standard_resolution"
-                    ),
-                    new OutCookieCsrf(
+                        new ImagesInstagramRecent(
+                            new Configuration(
+                                "Instagram"
+                            ),
+                            "standard_resolution"
+                        ),
+                        new OutCookieCsrf(
+                            new CsrfTokens(
+                                new Configuration(
+                                    "Server.Security"
+                                )
+                            ),
+                            new OutHtmlNunjucks(
+                                "home/index.html"
+                            )
+                        )
+                    )
+                ),
+                new RoutePost(
+                    Urls.Home,
+                    new ActCsrfProtected(
                         new CsrfTokens(
                             new Configuration(
                                 "Server.Security"
                             )
                         ),
-                        new OutHtmlNunjucks(
-                            "home/index.html"
-                        )
-                    )
-                )
-            ),
-            new RoutePost(
-                Urls.Home,
-                new ActCsrfProtected(
-                    new CsrfTokens(
-                        new Configuration(
-                            "Server.Security"
-                        )
-                    ),
-                    new OutStatusForbidden(
-                        "CSRF Failed: CSRF token missing or incorrect"
-                    ),
-                    new ActRequestBodyValidated(
-                        new ValidationComposite(
-                            new Required(
-                                "phone"
-                            ),
-                            new MaxLength(
-                                "name",
-                                50
-                            ),
-                            new MaxLength(
-                                "time",
-                                50
-                            )
+                        new OutStatusForbidden(
+                            "CSRF Failed: CSRF token missing or incorrect"
                         ),
-                        new OutStatusUnprocessableEntity(),
-                        new ActHomePostBackcall(
-                            new Configuration(
-                                "Server"
-                            ),
-                            new Configuration(
-                                "Contacts"
-                            ),
-                            new SmtpMailRu(
-                                new Configuration(
-                                    "Smtp.MailRu"
+                        new ActRequestBodyValidated(
+                            new ValidationComposite(
+                                new Required(
+                                    "phone"
+                                ),
+                                new MaxLength(
+                                    "name",
+                                    50
+                                ),
+                                new MaxLength(
+                                    "time",
+                                    50
                                 )
                             ),
-                            new OutStatusNoContent(
-                                "Success"
+                            new OutStatusUnprocessableEntity(),
+                            new ActHomePostBackcall(
+                                new Configuration(
+                                    "Server"
+                                ),
+                                new Configuration(
+                                    "Contacts"
+                                ),
+                                new SmtpMailRu(
+                                    new Configuration(
+                                        "Smtp.MailRu"
+                                    )
+                                ),
+                                new OutStatusNoContent(
+                                    "Success"
+                                )
                             )
                         )
                     )
-                )
-            ),
-            new RouteGet(
-                "/portfolio/:ext/:name",
-                new ActPortfolioGet(
-                    new Configuration(
-                        "Contacts"
-                    ),
-                    new ImagesInstagramRecent(
+                ),
+                new RouteGet(
+                    "/portfolio/:ext/:name",
+                    new ActPortfolioGet(
                         new Configuration(
-                            "Instagram"
+                            "Contacts"
                         ),
-                        "standard_resolution"
-                    ),
-                    new OutHtmlNunjucks(
-                        "portfolio/index.html"
-                    )
-                )
-            ),
-            new RouteNotFound(
-                new ActOutput(
-                    new OutStatusNotFound(
+                        new ImagesInstagramRecent(
+                            new Configuration(
+                                "Instagram"
+                            ),
+                            "standard_resolution"
+                        ),
                         new OutHtmlNunjucks(
-                            "404.html"
+                            "portfolio/index.html"
+                        )
+                    )
+                ),
+                new RouteNotFound(
+                    new ActOutput(
+                        new OutStatusNotFound(
+                            new OutHtmlNunjucks(
+                                "404.html"
+                            )
                         )
                     )
                 )

@@ -1,20 +1,13 @@
-import {Request, Response, Router} from "express";
+import {Router} from "express";
 import {IActionAsync} from "../actions/IActionAsync";
-import {IRoute} from "./IRoute";
+import {RouteAbstract} from "./RouteAbstract";
 
-export class RouteNotFound implements IRoute {
-    private act: IActionAsync;
-
-    constructor(act: IActionAsync) {
-        this.act = act;
+export class RouteNotFound extends RouteAbstract {
+    constructor(action: IActionAsync) {
+        super("*", action);
     }
 
     public extend(router: Router): void {
-        router
-            .route("*")
-            .all(async (req: Request, res: Response) => {
-                const out = await this.act.output(req);
-                out.write(res);
-            });
+        super.all(router);
     }
 }
