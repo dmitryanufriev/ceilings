@@ -64,7 +64,9 @@ export class Application {
         this.routes =
             new RoutesSafe(
                 new OutStatusInternalServerError(
-                    new OutText("Internal Server Error")
+                    new OutHtmlNunjucks(
+                        "error/500.html"
+                    )
                 ),
                 new Routes(
                     new RouteGet(
@@ -157,7 +159,7 @@ export class Application {
                         new ActOutput(
                             new OutStatusNotFound(
                                 new OutHtmlNunjucks(
-                                    "404.html"
+                                    "error/404.html"
                                 )
                             )
                         )
