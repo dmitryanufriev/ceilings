@@ -5,8 +5,6 @@ body {
 
 @import (inline) "../../../node_modules/social-likes-next/lib/social-likes_birman.css";
 
-@import "navbar";
-
 @import "pages/home";
 @import "pages/portfolio";
 @import "pages/contacts";
@@ -14,3 +12,16 @@ body {
 @import "modals/back-call";
 
 @import "notifications/notification";
+
+.scroll-to-top {
+    display: block;
+    position: relative;
+    padding-left: 1rem;
+    &:before {
+        font-family: "fontello";
+        content: "\e804";
+        position: absolute;
+        left: 0;
+        bottom: 2px;
+    }
+}

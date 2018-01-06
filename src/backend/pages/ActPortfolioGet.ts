@@ -24,13 +24,11 @@ export class ActPortfolioGet implements IActionAsync {
             ),
             this.images
         ).images();
-        return Promise.resolve(
-            this.out.with({
-                title: "Натяжные потолки от Жени",
-                description: `тел.: ${this.contacts.value("phone")}`,
-                image: images.length > 0 ? images[0].src() : "",
-                url: `${req.protocol}://${req.headers.host}`
-            })
-        );
+        return this.out.with({
+            title: "Натяжные потолки от Жени",
+            description: `тел.: ${this.contacts.value("phone")}`,
+            image: images.length > 0 ? images[0].src() : "",
+            url: `${req.protocol}://${req.headers.host}`
+        });
     }
 }

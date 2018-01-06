@@ -105,6 +105,11 @@ var portfolioPage = new Vue({
     }
 });
 
+var contacts = new Vue({
+    el: "#contacts",
+    mixins: [scrollToPageMixin]
+});
+
 var backCallModal = new Vue({
     el: "#modalBackCall",
     created: function () {
