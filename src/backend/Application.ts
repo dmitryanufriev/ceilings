@@ -3,13 +3,16 @@ import * as http from "http";
 import * as path from "path";
 
 import {ActCsrfProtected} from "./application/actions/ActCsrfProtected";
+import {ActOutput} from "./application/actions/ActOutput";
 import {ActRequestBodyValidated} from "./application/actions/ActRequestBodyValidated";
 import {OutCookieCsrf} from "./application/outputs/OutCookieCsrf";
 import {OutForbidden} from "./application/outputs/OutForbidden";
 import {OutHtmlNunjucks} from "./application/outputs/OutHtmlNunjucks";
 import {OutNoContent} from "./application/outputs/OutNoContent";
+import {OutStatusNotFound} from "./application/outputs/OutStatusNotFound";
 import {OutUnprocessableEntity} from "./application/outputs/OutUnprocessableEntity";
 import {RouteGet} from "./application/routing/RouteGet";
+import {RouteNotFound} from "./application/routing/RouteNotFound";
 import {RoutePost} from "./application/routing/RoutePost";
 import {Routes} from "./application/routing/Routes";
 import {Configuration} from "./configuration/Configuration";
@@ -138,6 +141,15 @@ export class Application {
                     ),
                     new OutHtmlNunjucks(
                         "portfolio/index.html"
+                    )
+                )
+            ),
+            new RouteNotFound(
+                new ActOutput(
+                    new OutStatusNotFound(
+                        new OutHtmlNunjucks(
+                            "404.html"
+                        )
                     )
                 )
             )
