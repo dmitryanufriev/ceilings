@@ -6,11 +6,11 @@ import {ActCsrfProtected} from "./application/actions/ActCsrfProtected";
 import {ActOutput} from "./application/actions/ActOutput";
 import {ActRequestBodyValidated} from "./application/actions/ActRequestBodyValidated";
 import {OutCookieCsrf} from "./application/outputs/OutCookieCsrf";
-import {OutForbidden} from "./application/outputs/OutForbidden";
 import {OutHtmlNunjucks} from "./application/outputs/OutHtmlNunjucks";
-import {OutNoContent} from "./application/outputs/OutNoContent";
+import {OutStatusForbidden} from "./application/outputs/OutStatusForbidden";
+import {OutStatusNoContent} from "./application/outputs/OutStatusNoContent";
 import {OutStatusNotFound} from "./application/outputs/OutStatusNotFound";
-import {OutUnprocessableEntity} from "./application/outputs/OutUnprocessableEntity";
+import {OutStatusUnprocessableEntity} from "./application/outputs/OutStatusUnprocessableEntity";
 import {RouteGet} from "./application/routing/RouteGet";
 import {RouteNotFound} from "./application/routing/RouteNotFound";
 import {RoutePost} from "./application/routing/RoutePost";
@@ -90,7 +90,7 @@ export class Application {
                             "Server.Security"
                         )
                     ),
-                    new OutForbidden(
+                    new OutStatusForbidden(
                         "CSRF Failed: CSRF token missing or incorrect"
                     ),
                     new ActRequestBodyValidated(
@@ -107,7 +107,7 @@ export class Application {
                                 50
                             )
                         ),
-                        new OutUnprocessableEntity(),
+                        new OutStatusUnprocessableEntity(),
                         new ActHomePostBackcall(
                             new Configuration(
                                 "Server"
@@ -120,7 +120,7 @@ export class Application {
                                     "Smtp.MailRu"
                                 )
                             ),
-                            new OutNoContent(
+                            new OutStatusNoContent(
                                 "Success"
                             )
                         )

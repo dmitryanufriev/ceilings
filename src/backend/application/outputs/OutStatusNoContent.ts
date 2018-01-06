@@ -3,11 +3,11 @@ import {IOutput} from "./IOutput";
 import {OutStatus} from "./OutStatus";
 import {OutText} from "./OutText";
 
-export class OutForbidden implements IOutput {
-    private statusCode: number = 403;
+export class OutStatusNoContent implements IOutput {
+    private statusCode: number = 204;
     private origin: IOutput;
 
-    constructor(reason: string = "Forbidden") {
+    constructor(reason: string = "No Content") {
         this.origin = new OutStatus(
             this.statusCode,
             new OutText(
@@ -17,10 +17,11 @@ export class OutForbidden implements IOutput {
     }
 
     public with(values: any): IOutput {
-        return this.origin;
+        return this;
     }
 
     public write(res: Response): void {
         this.origin.write(res);
     }
+
 }

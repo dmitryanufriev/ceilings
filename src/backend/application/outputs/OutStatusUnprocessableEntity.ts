@@ -1,13 +1,13 @@
-import {Response} from "express";
+import * as e from "express";
 import {IOutput} from "./IOutput";
 import {OutStatus} from "./OutStatus";
 import {OutText} from "./OutText";
 
-export class OutNoContent implements IOutput {
-    private statusCode: number = 204;
+export class OutStatusUnprocessableEntity implements IOutput {
+    private statusCode = 422;
     private origin: IOutput;
 
-    constructor(reason: string = "No Content") {
+    constructor(reason: string = "Unprocessable Entity") {
         this.origin = new OutStatus(
             this.statusCode,
             new OutText(
@@ -20,8 +20,7 @@ export class OutNoContent implements IOutput {
         return this;
     }
 
-    public write(res: Response): void {
+    public write(res: e.Response): void {
         this.origin.write(res);
     }
-
 }
