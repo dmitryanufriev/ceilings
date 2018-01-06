@@ -12,7 +12,6 @@ import {OutStatusInternalServerError} from "./application/outputs/OutStatusInter
 import {OutStatusNoContent} from "./application/outputs/OutStatusNoContent";
 import {OutStatusNotFound} from "./application/outputs/OutStatusNotFound";
 import {OutStatusUnprocessableEntity} from "./application/outputs/OutStatusUnprocessableEntity";
-import {OutText} from "./application/outputs/OutText";
 import {IRoutes} from "./application/routing/IRoutes";
 import {RouteGet} from "./application/routing/RouteGet";
 import {RouteNotFound} from "./application/routing/RouteNotFound";
