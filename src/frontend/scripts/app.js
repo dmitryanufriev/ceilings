@@ -36,7 +36,7 @@ var scrollToPageMixin = {
 var bus = new Vue();
 
 var aboutPage = new Vue({
-    el: "about",
+    el: "#about",
     mixins: [scrollToPageMixin]
 });
 
