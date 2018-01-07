@@ -12,13 +12,19 @@ body {
 @import "notifications/notification";
 
 .scroll-to-top {
-    visibility: hidden;
     position: fixed;
     top: 1rem;
     right: 1rem;
+    visibility: hidden;
+    opacity: 0;
 
     &.visible {
         visibility: visible;
+        opacity: .7;
+
+        &:hover {
+            opacity: 1;
+        }
     }
 
     .btn {
