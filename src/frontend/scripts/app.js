@@ -8,24 +8,19 @@ var scrollToPageMixin = {
             event.preventDefault();
             var el = event.target;
             var pageId = $(el).attr("href");
-            // Figure out element to scroll to
-            var page = $(pageId);
-            $("html, body").animate(
-                {
+            var page = pageId === "#" ? $("body") : $(pageId);
+            $("html, body").animate({
                     scrollTop: page.offset().top
                 },
                 500,
                 function () {
-                    // Callback after animation
-                    // Must change focus!
                     var $target = $(page);
                     $target.focus();
                     if ($target.is(":focus")) {
-                        // Checking if the target was focused
                         return false;
                     } else {
-                        $target.attr("tabindex", "-1"); // Adding tabindex for elements not focusable
-                        $target.focus(); // Set focus again
+                        $target.attr("tabindex", "-1");
+                        $target.focus();
                     }
                 }
             );
@@ -46,6 +41,27 @@ var homePage = new Vue({
     methods: {
         backCall: function (modalId) {
             bus.$emit("back-call:show");
+        }
+    }
+});
+
+var toTop = new Vue({
+    el: "#toTop",
+    mixins: [scrollToPageMixin],
+    created: function () {
+        window.addEventListener("scroll", this.onWindowScroll)
+    },
+    destroyed: function () {
+        window.removeEventListener("scroll", this.onWindowScroll);
+    },
+    data: function () {
+        return {
+            visible: false
+        };
+    },
+    methods: {
+        onWindowScroll: function () {
+            this.visible = window.scrollY > 20;
         }
     }
 });
