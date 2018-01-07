@@ -52,24 +52,54 @@
         </div>
     </div>
 
+    <!-- About -->
+    <div id="about" class="row py-4">
+        <div class="col-md-3"></div>
+        <div class="col-sm col-md-6">
+
+            <!-- Page title -->
+            <h3 class="mb-3">Обо мне</h3>
+
+            <img class="mr-3 my-1 float-left" src="/public/images/experience_64x80.jpg" alt="Опыт">
+            <h5 class="mt-0">Опыт</h5>
+            <p>
+                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras
+                purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
+                vulputate fringilla. Donec lacinia congue felis in faucibus.
+            </p>
+            <img class="mr-3 my-1 float-left" src="/public/images/resume_new.jpg" alt="Качество">
+            <h5 class="mt-0">Качество</h5>
+            <p>
+                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras
+                purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
+                vulputate fringilla. Donec lacinia congue felis in faucibus.
+            </p>
+            <img class="mr-3 my-1 float-left" src="/public/images/price_64x73.jpg" alt="Доступность">
+            <h5 class="mt-0">Доступность</h5>
+            <p class="mb-0">
+                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras
+                purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
+                vulputate fringilla. Donec lacinia congue felis in faucibus.
+            </p>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
     <!-- Portfolio -->
 
-    <div id="portfolio" class="row py-4">
+    <div id="portfolio" class="row pb-4">
         <div class="col-md-3"></div>
         <div class="col-sm col-md-6">
 
             <!-- Page title -->
             <h3 class="mb-3">Мои работы</h3>
 
-            <!-- to Top -->
-            <a href="#home" class="scroll-to-top mb-3" @click="scrollToPage">Наверх</a>
-
             <!-- Photos carousel -->
             <div id="carouselPortfolio" class="carousel slide" data-ride="carousel" data-interval="false">
-                <div class="carousel-inner bg-dark rounded-top">
+                <div class="carousel-inner bg-secondary rounded">
                     {% for image in images %}
                     <div class="carousel-item {{ 'active' if loop.first }}">
-                        <img class="d-block w-75 mx-auto" src="{{ image.src }}">
+                        <img class="d-block mx-auto" src="{{ image.src }}">
                         <a href="{{ image.href }}" target="_blank" class="view-on-instagram w-100"
                            title="Посмотреть в Instagram">
                             <i class="icon-instagram-2"></i>
@@ -88,8 +118,8 @@
             </div>
 
             <!-- Social share -->
-            <div class="social-share d-flex justify-content-between align-items-center bg-light border border-top-0 rounded-bottom p-2 mb-3">
-                <span class="text-secondary">Расскажите друзьям</span>
+            <div class="social-share d-flex align-items-center my-3">
+                <span class="mr-3">Расскажите друзьям:</span>
                 <ul class="list-inline mb-0">
                     <li class="list-inline-item">
                         <button class="btn-social-share facebook" title="на Facebook" @click="shareOnFacebook">
@@ -116,9 +146,6 @@
                 <div class="col-sm">
                     <!-- Page title -->
                     <h3 class="mb-3">Контакты</h3>
-
-                    <!-- to Top -->
-                    <a href="#home" class="scroll-to-top mb-3" @click="scrollToPage">Наверх</a>
                 </div>
             </div>
             <div class="row">
