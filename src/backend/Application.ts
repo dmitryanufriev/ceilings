@@ -182,6 +182,7 @@ export class Application {
             );
     }
 
+    // noinspection JSUnusedGlobalSymbols Используется в ./bin/www
     public run() {
         const app = express();
         this.settings.setUp(app);

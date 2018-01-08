@@ -100,10 +100,11 @@
                     {% for image in images %}
                     <div class="carousel-item {{ 'active' if loop.first }}">
                         <img class="d-block mx-auto" src="{{ image.src }}">
-                        <a href="{{ image.href }}" target="_blank" class="view-on-instagram w-100"
-                           title="Посмотреть в Instagram">
-                            <i class="icon-instagram-2"></i>
-                        </a>
+                        <div class="view-on-instagram">
+                            <a href="{{ image.href }}" target="_blank" title="Посмотреть в Instagram">
+                                <i class="icon-instagram-2"></i>
+                            </a>
+                        </div>
                     </div>
                     {% endfor %}
                 </div>

@@ -26,18 +26,28 @@
         display: block;
         position: absolute;
         bottom: 0;
+        width: 100%;
         text-align: center;
-        background-color: fadeout(@background-color-dark, 50%);
-        outline: none;
-        opacity: .5;
 
-        i {
-            color: #ffffff;
-            font-size: 2rem;
-        }
+        a {
+            display: inline-block;
+            background-color: fadeout(@background-color-dark, 50%);
+            outline: none;
+            opacity: .5;
+            width: 100%;
 
-        &:hover {
-            opacity: 1;
+            @media (min-width: 468px) {
+                width: 70%;
+            }
+
+            &:hover {
+                opacity: 1;
+            }
+
+            i {
+                color: #ffffff;
+                font-size: 2rem;
+            }
         }
     }
 
