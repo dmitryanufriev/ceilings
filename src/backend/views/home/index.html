@@ -264,15 +264,11 @@
                             <input id="time" maxlength="50"
                                    v-model="form.fields.time"
                                    type="text"
-                                   data-inputmask="'mask': 'с 99:99 до 99:99', 'showMaskOnHover': 'false'"
                                    class="form-control"
-                                   placeholder="Например, с 10:00 до 12:00"
+                                   placeholder="Ближайшее"
                                    aria-describedby="timeHelp">
-                            <small id="timeHelp" class="form-text text-muted">
-                                Это поле можно оставить пустым и тогда администратор свяжется с Вами в ближайшее время.
-                            </small>
                         </div>
-                        <div class="submit d-flex justify-content-center">
+                        <div class="submit d-flex justify-content-center pt-2">
                             <button type="submit" class="btn btn-primary justify-self-center">Отправить</button>
                         </div>
                     </form>
