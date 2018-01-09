@@ -1,4 +1,4 @@
-import {JsonObjectComposite} from "../../application/aux/JsonObjectComposite";
+import {JsonObjectComposite} from "../../application/misc/JsonObjectComposite";
 import {ISmtpField} from "./fields/ISmtpField";
 
 export class SmtpMessage {
