@@ -1,4 +1,4 @@
-import {ISpecification} from "../application/specifications/ISpecification";
+import {ISpecification} from "../specifications/ISpecification";
 import {IImageInstagram} from "./IImageInstagram";
 
 export class SpecSrcEndsWith implements ISpecification<IImageInstagram> {

@@ -1,6 +1,6 @@
 import * as e from "express";
-import {IValidationRule} from "../../validation/IValidationRule";
 import {IOutput} from "../outputs/IOutput";
+import {IValidationRule} from "../validation/IValidationRule";
 import {IActionAsync} from "./IActionAsync";
 
 export class ActRequestBodyValidated implements IActionAsync {

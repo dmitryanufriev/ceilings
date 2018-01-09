@@ -1,6 +1,6 @@
 import * as cookieParser from "cookie-parser";
 import {Application} from "express";
-import {IConfiguration} from "../configuration/IConfiguration";
+import {IConfiguration} from "../actress/configuration/IConfiguration";
 import {ISettings} from "./ISettings";
 
 export class SettingsSecuredCookies implements ISettings {

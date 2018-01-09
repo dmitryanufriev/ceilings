@@ -1,10 +1,10 @@
 import * as e from "express";
-import {IActionAsync} from "../application/actions/IActionAsync";
-import {IOutput} from "../application/outputs/IOutput";
-import {IConfiguration} from "../configuration/IConfiguration";
-import {IImagesInstagram} from "../instagram/IImagesInstagram";
-import {ImagesInstagramBySpec} from "../instagram/ImagesInstagramBySpec";
-import {SpecSrcEndsWith} from "../instagram/SpecSrcEndsWith";
+import {IActionAsync} from "../actress/actions/IActionAsync";
+import {IConfiguration} from "../actress/configuration/IConfiguration";
+import {IImagesInstagram} from "../actress/instagram/IImagesInstagram";
+import {ImagesInstagramBySpec} from "../actress/instagram/ImagesInstagramBySpec";
+import {SpecSrcEndsWith} from "../actress/instagram/SpecSrcEndsWith";
+import {IOutput} from "../actress/outputs/IOutput";
 
 export class ActPortfolioGet implements IActionAsync {
     private contacts: IConfiguration;

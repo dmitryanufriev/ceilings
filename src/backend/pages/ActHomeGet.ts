@@ -1,9 +1,9 @@
 import {Request} from "express";
-import {IActionAsync} from "../application/actions/IActionAsync";
-import {IOutput} from "../application/outputs/IOutput";
-import {IConfiguration} from "../configuration/IConfiguration";
-import {ImageInstagram} from "../instagram/ImageInstagram";
-import {ImagesInstagramRecent} from "../instagram/ImagesInstagramRecent";
+import {IActionAsync} from "../actress/actions/IActionAsync";
+import {IConfiguration} from "../actress/configuration/IConfiguration";
+import {ImageInstagram} from "../actress/instagram/ImageInstagram";
+import {ImagesInstagramRecent} from "../actress/instagram/ImagesInstagramRecent";
+import {IOutput} from "../actress/outputs/IOutput";
 
 export class ActHomeGet implements IActionAsync {
     private contacts: IConfiguration;

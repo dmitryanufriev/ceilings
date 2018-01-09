@@ -1,4 +1,4 @@
-import {IHtmlEngine} from "../../../application/html/IHtmlEngine";
+import {IHtmlEngine} from "../../../html/IHtmlEngine";
 import {ISmtpField} from "./ISmtpField";
 
 export class SmtpHtml implements ISmtpField {

@@ -1,5 +1,5 @@
 import {Request} from "express";
-import {CsrfTokens} from "../../csrf/CsrfTokens";
+import {CsrfTokens} from "../csrf/CsrfTokens";
 import {IOutput} from "../outputs/IOutput";
 import {IActionAsync} from "./IActionAsync";
 

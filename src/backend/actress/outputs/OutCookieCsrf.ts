@@ -1,5 +1,5 @@
 import {Response} from "express";
-import {CsrfTokens} from "../../csrf/CsrfTokens";
+import {CsrfTokens} from "../csrf/CsrfTokens";
 import {IOutput} from "./IOutput";
 
 export class OutCookieCsrf implements IOutput {
