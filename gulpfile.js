@@ -9,11 +9,12 @@ var envify = require("envify/custom");
 var source = require("vinyl-source-stream");
 var uglify = require("gulp-uglify");
 var buffer = require("vinyl-buffer");
+var del = require('del');
 var LessAutoprefix = require("less-plugin-autoprefix");
 
 var autoprefix = new LessAutoprefix({browsers: ["last 2 versions"]});
 
-/* Backend */
+/*-------- Backend --------*/
 
 var tsSrc = "./src/backend/**/*.ts";
 
@@ -35,7 +36,7 @@ gulp.task("backend:copy:views", function () {
 });
 
 
-/* Frontend */
+/*-------- Frontend --------*/
 
 gulp.task("frontend:compile:less", function () {
     gulp
@@ -85,7 +86,14 @@ gulp.task("frontend:compile:js", function () {
         .pipe(gulp.dest("./dist/public/scripts"));
 });
 
-gulp.task("default", [
+
+/*-------- Deploy --------*/
+
+gulp.task("clean", function () {
+    return del(["./package"]);
+});
+
+gulp.task("build", [
     "backend:lint:ts",
     "backend:compile:ts",
     "backend:copy:views",
@@ -95,3 +103,18 @@ gulp.task("default", [
     "frontend:font:styles:copy",
     "frontend:images:copy"
 ]);
+
+gulp.task("package", ["clean", "build"], function () {
+    gulp
+        .src(["./bin/**/*", "./config/**/*", "./dist/**/*", "./package.json"], {
+            base: "."
+        })
+        .pipe(
+            gulp.dest("./package")
+        );
+});
+
+
+/*-------- Default --------*/
+
+gulp.task("default", ["build"]);
