@@ -1,24 +1,23 @@
 {
     "name": "ceilings",
-    "engines": {
-        "node": "=8.9.3"
-    },
+    "description": "www.potolkiotjeni.ru",
+    "license": "MIT",
     "version": "1.0.0",
-    "private": true,
-    "description": "Web site about ceilings",
-    "main": "index.js",
-    "scripts": {
-        "dev": "NODE_ENV=development nodemon ./bin/www",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "browser": {
-        "vue": "vue/dist/vue.common.js"
-    },
     "author": {
         "name": "Dmitry Anufriev",
         "email": "dmitryanufriev@gmail.com"
     },
-    "license": "MIT",
+    "private": true,
+    "engines": {
+        "node": ">=8.9.3"
+    },
+    "scripts": {
+        "start": "NODE_ENV=production node ./bin/www",
+        "dev": "NODE_ENV=development nodemon ./bin/www"
+    },
+    "browser": {
+        "vue": "vue/dist/vue.common.js"
+    },
     "dependencies": {
         "axios": "^0.17.1",
         "body-parser": "^1.18.2",
