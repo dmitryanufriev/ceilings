@@ -1,4 +1,12 @@
 {
+    "server": {
+        "ip": "",
+        "port": "",
+        "admin": "",
+        "security": {
+            "secret": ""
+        }
+    },
     "Instagram": {
         "accessToken": ""
     },
@@ -9,12 +17,6 @@
             "Instagram": "#",
             "Facebook": "#",
             "VKontakte": "#"
-        }
-    },
-    "Server": {
-        "Admin": "",
-        "Security": {
-            "secret": ""
         }
     },
     "Smtp": {

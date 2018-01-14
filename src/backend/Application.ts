@@ -1,5 +1,8 @@
+import * as bodyParser from "body-parser";
+import * as cookieParser from "cookie-parser";
 import * as express from "express";
 import * as http from "http";
+import * as nunjucks from "nunjucks";
 import * as path from "path";
 
 import {ActCsrfProtected} from "./actress/actions/ActCsrfProtected";
@@ -8,6 +11,7 @@ import {ActRequestBodyValidated} from "./actress/actions/ActRequestBodyValidated
 import {Configuration} from "./actress/configuration/Configuration";
 import {ConfigurationComposite} from "./actress/configuration/ConfigurationComposite";
 import {ConfigurationRoot} from "./actress/configuration/ConfigurationRoot";
+import {IConfiguration} from "./actress/configuration/IConfiguration";
 import {CsrfTokens} from "./actress/csrf/CsrfTokens";
 import {HtmlEngineNunjucks} from "./actress/html/HtmlEngineNunjucks";
 import {IInstagramConfiguration} from "./actress/images/instagram/IInstagramConfiguration";
@@ -32,20 +36,14 @@ import {ValidationComposite} from "./actress/validation/ValidationComposite";
 import {ActHomeGet} from "./pages/ActHomeGet";
 import {ActHomePostBackcall} from "./pages/ActHomePostBackcall";
 import {ActPortfolioGet} from "./pages/ActPortfolioGet";
-import {ISettings} from "./settings/ISettings";
-import {SettingsManual} from "./settings/SettingsManual";
-import {SettingsNunjucks} from "./settings/SettingsNunjucks";
-import {SettingsRequestBody} from "./settings/SettingsRequestBody";
-import {SettingsSecuredCookies} from "./settings/SettingsSecuredCookies";
-import {SettingsStaticResources} from "./settings/SettingsStaticResources";
 
 enum Urls {
     Home = "/"
 }
 
 export class Application {
-    private settings: ISettings;
-    private routes: IRoutes;
+    private readonly configuration: IConfiguration;
+    private readonly routes: IRoutes;
 
     constructor() {
         const configuration = new ConfigurationRoot();
@@ -56,22 +54,7 @@ export class Application {
                 }
             }()
         );
-        this.settings = new SettingsRequestBody(
-            new SettingsSecuredCookies(
-                new Configuration(
-                    "Server.Security"
-                ),
-                new SettingsNunjucks(
-                    path.join(__dirname, "views"),
-                    new SettingsStaticResources(
-                        path.join(__dirname, "public"),
-                        "/public",
-                        new SettingsManual(8080)
-                    )
-                )
-            )
-        );
-
+        this.configuration = configuration;
         this.routes =
             new RoutesSafe(
                 new OutStatusInternalServerError(
@@ -92,7 +75,7 @@ export class Application {
                             new OutCookieCsrf(
                                 new CsrfTokens(
                                     new Configuration(
-                                        "Server.Security"
+                                        "server.security"
                                     )
                                 ),
                                 new OutHtml(
@@ -108,7 +91,7 @@ export class Application {
                         new ActCsrfProtected(
                             new CsrfTokens(
                                 new Configuration(
-                                    "Server.Security"
+                                    "server.security"
                                 )
                             ),
                             new OutStatusForbidden(
@@ -132,7 +115,7 @@ export class Application {
                                 new ActHomePostBackcall(
                                     new ConfigurationComposite(
                                         new Configuration(
-                                            "Server"
+                                            "server"
                                         ),
                                         new Configuration(
                                             "Contacts"
@@ -182,10 +165,42 @@ export class Application {
 
     // noinspection JSUnusedGlobalSymbols Используется в ./bin/www
     public run() {
+        // TODO Nunjucks settings to HtmlEngineNunjucks
+        const env = nunjucks.configure(
+            path.join(__dirname, "views"), {
+                autoescape: true
+            }
+        );
+        env.addFilter("digits", (x: string) => x.match(/\d+/g).join(""));
         const app = express();
-        this.settings.setUp(app);
+        app.use(
+            "/public",
+            express.static(
+                path.join(__dirname, "public")
+            )
+        );
+        app.use(
+            cookieParser(
+                this.configuration.value(
+                    "server.security.secret"
+                )
+            )
+        );
+        app.use(
+            bodyParser.json()
+        );
         this.routes.setUp(app);
-        const server = http.createServer(app).listen(app.settings.port);
-        server.on("listening", () => console.log(`Listen on port ${server.address().port}...`));
+        const server = http.createServer(
+            app
+        ).listen(
+            this.configuration.value("server.port"),
+            this.configuration.value("server.ip")
+        );
+        server.on(
+            "listening",
+            () => console.log(
+                `Listen ${server.address().address} on ${server.address().port}...`
+            )
+        );
     }
 }
