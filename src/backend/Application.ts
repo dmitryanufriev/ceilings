@@ -12,7 +12,7 @@ import {Configuration} from "./actress/configuration/Configuration";
 import {ConfigurationComposite} from "./actress/configuration/ConfigurationComposite";
 import {ConfigurationRoot} from "./actress/configuration/ConfigurationRoot";
 import {IConfiguration} from "./actress/configuration/IConfiguration";
-import {CsrfTokens} from "./actress/csrf/CsrfTokens";
+import {CsrfTokens, ICsrfTokensConfiguration} from "./actress/csrf";
 import {HtmlEngineNunjucks} from "./actress/html/HtmlEngineNunjucks";
 import {IInstagramConfiguration} from "./actress/images/instagram/IInstagramConfiguration";
 import {ImagesInstagramRecentStandartResolution} from "./actress/images/instagram/recent";
@@ -37,6 +37,7 @@ import {ActHomeGet} from "./pages/ActHomeGet";
 import {ActHomePostBackcall} from "./pages/ActHomePostBackcall";
 import {ActPortfolioGet} from "./pages/ActPortfolioGet";
 
+// noinspection JSUnusedGlobalSymbols
 export class Application {
     private readonly configuration: IConfiguration;
     private readonly routes: IRoutes;
@@ -47,6 +48,13 @@ export class Application {
             new class implements IInstagramConfiguration {
                 public accessToken(): string {
                     return configuration.value("Instagram.accessToken");
+                }
+            }()
+        );
+        const csrfTokens = new CsrfTokens(
+            new class implements ICsrfTokensConfiguration {
+                public secret(): string {
+                    return configuration.value("server.security.secret");
                 }
             }()
         );
@@ -67,11 +75,7 @@ export class Application {
                             configuration,
                             instagramImages,
                             new OutCookieCsrf(
-                                new CsrfTokens(
-                                    new Configuration(
-                                        "server.security"
-                                    )
-                                ),
+                                csrfTokens,
                                 new OutHtml(
                                     new HtmlEngineNunjucks(
                                         "home/index.html"
@@ -83,11 +87,7 @@ export class Application {
                     new RoutePost(
                         "/",
                         new ActCsrfProtected(
-                            new CsrfTokens(
-                                new Configuration(
-                                    "server.security"
-                                )
-                            ),
+                            csrfTokens,
                             new OutStatusForbidden(
                                 "CSRF Failed: CSRF token missing or incorrect"
                             ),
