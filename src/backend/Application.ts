@@ -7,9 +7,11 @@ import {ActOutput} from "./actress/actions/ActOutput";
 import {ActRequestBodyValidated} from "./actress/actions/ActRequestBodyValidated";
 import {Configuration} from "./actress/configuration/Configuration";
 import {ConfigurationComposite} from "./actress/configuration/ConfigurationComposite";
+import {ConfigurationRoot} from "./actress/configuration/ConfigurationRoot";
 import {CsrfTokens} from "./actress/csrf/CsrfTokens";
 import {HtmlEngineNunjucks} from "./actress/html/HtmlEngineNunjucks";
-import {ImagesInstagramRecent} from "./actress/instagram/ImagesInstagramRecent";
+import {IInstagramConfiguration} from "./actress/images/instagram/IInstagramConfiguration";
+import {ImagesInstagramRecentStandartResolution} from "./actress/images/instagram/recent";
 import {OutCookieCsrf} from "./actress/outputs/OutCookieCsrf";
 import {OutHtml} from "./actress/outputs/OutHtml";
 import {OutStatusForbidden} from "./actress/outputs/OutStatusForbidden";
@@ -46,6 +48,14 @@ export class Application {
     private routes: IRoutes;
 
     constructor() {
+        const configuration = new ConfigurationRoot();
+        const instagramImages = new ImagesInstagramRecentStandartResolution(
+            new class implements IInstagramConfiguration {
+                public accessToken(): string {
+                    return configuration.value("Instagram.accessToken");
+                }
+            }()
+        );
         this.settings = new SettingsRequestBody(
             new SettingsSecuredCookies(
                 new Configuration(
@@ -78,12 +88,7 @@ export class Application {
                             new Configuration(
                                 "Contacts"
                             ),
-                            new ImagesInstagramRecent(
-                                new Configuration(
-                                    "Instagram"
-                                ),
-                                "standard_resolution"
-                            ),
+                            instagramImages,
                             new OutCookieCsrf(
                                 new CsrfTokens(
                                     new Configuration(
@@ -151,15 +156,8 @@ export class Application {
                     new RouteGet(
                         "/portfolio/:ext/:name",
                         new ActPortfolioGet(
-                            new Configuration(
-                                "Contacts"
-                            ),
-                            new ImagesInstagramRecent(
-                                new Configuration(
-                                    "Instagram"
-                                ),
-                                "standard_resolution"
-                            ),
+                            configuration,
+                            instagramImages,
                             new OutHtml(
                                 new HtmlEngineNunjucks(
                                     "portfolio/index.html"

@@ -1,32 +1,32 @@
 import * as e from "express";
 import {IActionAsync} from "../actress/actions/IActionAsync";
 import {IConfiguration} from "../actress/configuration/IConfiguration";
-import {IImagesInstagram} from "../actress/instagram/IImagesInstagram";
-import {ImagesInstagramBySpec} from "../actress/instagram/ImagesInstagramBySpec";
-import {SpecSrcEndsWith} from "../actress/instagram/SpecSrcEndsWith";
+import {IImages} from "../actress/images/IImages";
+import {ImagesBySpec} from "../actress/images/ImagesBySpec";
+import {SpecImageSrcEndsWith} from "../actress/images/specifications/SpecImageSrcEndsWith";
 import {IOutput} from "../actress/outputs/IOutput";
 
 export class ActPortfolioGet implements IActionAsync {
-    private contacts: IConfiguration;
-    private images: IImagesInstagram;
-    private out: IOutput;
+    private readonly configuration: IConfiguration;
+    private readonly images: IImages;
+    private readonly out: IOutput;
 
-    constructor(contacts: IConfiguration, images: IImagesInstagram, output: IOutput) {
+    constructor(contacts: IConfiguration, images: IImages, output: IOutput) {
         this.images = images;
-        this.contacts = contacts;
+        this.configuration = contacts;
         this.out = output;
     }
 
     public async output(req: e.Request): Promise<IOutput> {
-        const images = await new ImagesInstagramBySpec(
-            new SpecSrcEndsWith(
+        const images = await new ImagesBySpec(
+            new SpecImageSrcEndsWith(
                 `${req.params.name}.${req.params.ext}`
             ),
             this.images
-        ).images();
+        ).all();
         return this.out.with({
             title: "Натяжные потолки от Жени",
-            description: `тел.: ${this.contacts.value("phone")}`,
+            description: `тел.: ${this.configuration.value("Contacts.phone")}`,
             image: images.length > 0 ? images[0].src() : "",
             url: `${req.protocol}://${req.headers.host}`
         });
