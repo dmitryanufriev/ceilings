@@ -6,12 +6,12 @@ import {ImageInstagram} from "../actress/images/instagram/ImageInstagram";
 import {IOutput} from "../actress/outputs/IOutput";
 
 export class ActHomeGet implements IActionAsync {
-    private contacts: IConfiguration;
+    private configuration: IConfiguration;
     private images: IImages;
     private out: IOutput;
 
-    constructor(contacts: IConfiguration, images: IImages, output: IOutput) {
-        this.contacts = contacts;
+    constructor(configuration: IConfiguration, images: IImages, output: IOutput) {
+        this.configuration = configuration;
         this.images = images;
         this.out = output;
     }
@@ -19,27 +19,30 @@ export class ActHomeGet implements IActionAsync {
     public async output(req: Request): Promise<IOutput> {
         const recent = await this.images.all();
         return this.out.with({
-            Facebook: this.contacts.value(
-                "Social.Facebook"
+            phone: this.configuration.value(
+                "contacts.phone"
             ),
-            Instagram: this.contacts.value(
-                "Social.Instagram"
+            email: this.configuration.value(
+                "contacts.email"
             ),
-            VKontakte: this.contacts.value(
-                "Social.VKontakte"
+            telegram: this.configuration.value(
+                "contacts.telegram"
             ),
-            email: this.contacts.value(
-                "email"
+            facebook: this.configuration.value(
+                "contacts.social.facebook"
+            ),
+            instagram: this.configuration.value(
+                "contacts.social.instagram"
+            ),
+            vkontakte: this.configuration.value(
+                "contacts.social.vkontakte"
             ),
             images: recent.map((img: ImageInstagram) => {
                 return {
                     href: img.href(),
                     src: img.src()
                 };
-            }),
-            phone: this.contacts.value(
-                "phone"
-            )
+            })
         });
     }
 }

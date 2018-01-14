@@ -37,10 +37,6 @@ import {ActHomeGet} from "./pages/ActHomeGet";
 import {ActHomePostBackcall} from "./pages/ActHomePostBackcall";
 import {ActPortfolioGet} from "./pages/ActPortfolioGet";
 
-enum Urls {
-    Home = "/"
-}
-
 export class Application {
     private readonly configuration: IConfiguration;
     private readonly routes: IRoutes;
@@ -66,11 +62,9 @@ export class Application {
                 ),
                 new Routes(
                     new RouteGet(
-                        Urls.Home,
+                        "/",
                         new ActHomeGet(
-                            new Configuration(
-                                "Contacts"
-                            ),
+                            configuration,
                             instagramImages,
                             new OutCookieCsrf(
                                 new CsrfTokens(
@@ -87,7 +81,7 @@ export class Application {
                         )
                     ),
                     new RoutePost(
-                        Urls.Home,
+                        "/",
                         new ActCsrfProtected(
                             new CsrfTokens(
                                 new Configuration(

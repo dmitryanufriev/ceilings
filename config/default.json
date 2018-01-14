@@ -10,13 +10,14 @@
     "Instagram": {
         "accessToken": ""
     },
-    "Contacts": {
+    "contacts": {
         "phone": "",
         "email": "",
-        "Social": {
-            "Instagram": "#",
-            "Facebook": "#",
-            "VKontakte": "#"
+        "telegram": "",
+        "social": {
+            "instagram": "#",
+            "facebook": "#",
+            "vkontakte": "#"
         }
     },
     "Smtp": {
