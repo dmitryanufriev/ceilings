@@ -36,6 +36,7 @@ import {ValidationComposite} from "./actress/validation/ValidationComposite";
 import {ActHomeGet} from "./pages/ActHomeGet";
 import {ActHomePostBackcall} from "./pages/ActHomePostBackcall";
 import {ActPortfolioGet} from "./pages/ActPortfolioGet";
+import {OutText} from "./actress/outputs/OutText";
 
 // noinspection JSUnusedGlobalSymbols
 export class Application {
@@ -89,7 +90,7 @@ export class Application {
                         new ActCsrfProtected(
                             csrfTokens,
                             new OutStatusForbidden(
-                                "CSRF Failed: CSRF token missing or incorrect"
+                                new OutText("CSRF Failed: CSRF token missing or incorrect")
                             ),
                             new ActRequestBodyValidated(
                                 new ValidationComposite(
