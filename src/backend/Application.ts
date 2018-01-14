@@ -23,6 +23,7 @@ import {OutStatusInternalServerError} from "./actress/outputs/OutStatusInternalS
 import {OutStatusNoContent} from "./actress/outputs/OutStatusNoContent";
 import {OutStatusNotFound} from "./actress/outputs/OutStatusNotFound";
 import {OutStatusUnprocessableEntity} from "./actress/outputs/OutStatusUnprocessableEntity";
+import {OutText} from "./actress/outputs/OutText";
 import {IRoutes} from "./actress/routing/IRoutes";
 import {RouteGet} from "./actress/routing/RouteGet";
 import {RouteNotFound} from "./actress/routing/RouteNotFound";
@@ -36,7 +37,6 @@ import {ValidationComposite} from "./actress/validation/ValidationComposite";
 import {ActHomeGet} from "./pages/ActHomeGet";
 import {ActHomePostBackcall} from "./pages/ActHomePostBackcall";
 import {ActPortfolioGet} from "./pages/ActPortfolioGet";
-import {OutText} from "./actress/outputs/OutText";
 
 // noinspection JSUnusedGlobalSymbols
 export class Application {
