@@ -29,13 +29,13 @@ export class ActHomePostBackcall implements IActionAsync {
             new SmtpMessage(
                 new SmtpFrom(
                     new EmailAddress(
-                        this.configuration.value("email"),
+                        this.configuration.value("contacts.emails.from"),
                         "Натяжные потолки от Жени"
                     )
                 ),
                 new SmtpTo(
                     new EmailAddress(
-                        this.configuration.value("Admin")
+                        this.configuration.value("contacts.emails.order")
                     )
                 ),
                 new SmtpSubject(

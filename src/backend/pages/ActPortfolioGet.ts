@@ -26,7 +26,7 @@ export class ActPortfolioGet implements IActionAsync {
         ).all();
         return this.out.with({
             title: "Натяжные потолки от Жени",
-            description: `тел.: ${this.configuration.value("Contacts.phone")}`,
+            description: `тел.: ${this.configuration.value("contacts.phone")}`,
             image: images.length > 0 ? images[0].src() : "",
             url: `${req.protocol}://${req.headers.host}`
         });

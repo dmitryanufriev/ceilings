@@ -23,7 +23,7 @@ export class ActHomeGet implements IActionAsync {
                 "contacts.phone"
             ),
             email: this.configuration.value(
-                "contacts.email"
+                "contacts.emails.feedback"
             ),
             telegram: this.configuration.value(
                 "contacts.telegram"

@@ -7,12 +7,16 @@
             "secret": ""
         }
     },
-    "Instagram": {
+    "instagram": {
         "accessToken": ""
     },
     "contacts": {
         "phone": "",
-        "email": "",
+        "emails": {
+            "from": "",
+            "feedback": "",
+            "order": ""
+        },
         "telegram": "",
         "social": {
             "instagram": "#",
@@ -20,11 +24,14 @@
             "vkontakte": "#"
         }
     },
-    "Smtp": {
-        "MailRu": {
-            "Server": "smtp.mail.ru",
-            "User": "",
-            "Password": ""
-        }
+    "smtp": {
+        "host": "",
+        "port": 25,
+        "auth": {
+            "user": "",
+            "pass": ""
+        },
+        "pool": true,
+        "secure": true
     }
 }

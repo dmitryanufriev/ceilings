@@ -8,8 +8,6 @@ import * as path from "path";
 import {ActCsrfProtected} from "./actress/actions/ActCsrfProtected";
 import {ActOutput} from "./actress/actions/ActOutput";
 import {ActRequestBodyValidated} from "./actress/actions/ActRequestBodyValidated";
-import {Configuration} from "./actress/configuration/Configuration";
-import {ConfigurationComposite} from "./actress/configuration/ConfigurationComposite";
 import {ConfigurationRoot} from "./actress/configuration/ConfigurationRoot";
 import {IConfiguration} from "./actress/configuration/IConfiguration";
 import {CsrfTokens, ICsrfTokensConfiguration} from "./actress/csrf";
@@ -30,7 +28,7 @@ import {RouteNotFound} from "./actress/routing/RouteNotFound";
 import {RoutePost} from "./actress/routing/RoutePost";
 import {Routes} from "./actress/routing/Routes";
 import {RoutesSafe} from "./actress/routing/RoutesSafe";
-import {SmtpMailRu} from "./actress/smtp/transport/SmtpMailRu";
+import {SmtpTransport} from "./actress/smtp/transport";
 import {MaxLength} from "./actress/validation/MaxLength";
 import {Required} from "./actress/validation/Required";
 import {ValidationComposite} from "./actress/validation/ValidationComposite";
@@ -48,7 +46,7 @@ export class Application {
         const instagramImages = new ImagesInstagramRecentStandartResolution(
             new class implements IInstagramConfiguration {
                 public accessToken(): string {
-                    return configuration.value("Instagram.accessToken");
+                    return configuration.value("instagram.accessToken");
                 }
             }()
         );
@@ -108,21 +106,12 @@ export class Application {
                                 ),
                                 new OutStatusUnprocessableEntity(),
                                 new ActHomePostBackcall(
-                                    new ConfigurationComposite(
-                                        new Configuration(
-                                            "server"
-                                        ),
-                                        new Configuration(
-                                            "Contacts"
-                                        )
-                                    ),
+                                    configuration,
                                     new HtmlEngineNunjucks(
                                         "email/backcall.html"
                                     ),
-                                    new SmtpMailRu(
-                                        new Configuration(
-                                            "Smtp.MailRu"
-                                        )
+                                    new SmtpTransport(
+                                        configuration.value("smtp")
                                     ),
                                     new OutStatusNoContent(
                                         "Success"
