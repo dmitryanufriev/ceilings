@@ -34,7 +34,6 @@ import {Required} from "./actress/validation/Required";
 import {ValidationComposite} from "./actress/validation/ValidationComposite";
 import {ActHomeGet} from "./pages/ActHomeGet";
 import {ActHomePostBackcall} from "./pages/ActHomePostBackcall";
-import {ActPortfolioGet} from "./pages/ActPortfolioGet";
 
 // noinspection JSUnusedGlobalSymbols
 export class Application {
@@ -43,13 +42,6 @@ export class Application {
 
     constructor() {
         const configuration = new ConfigurationRoot();
-        const instagramImages = new ImagesInstagramRecentStandartResolution(
-            new class implements IInstagramConfiguration {
-                public accessToken(): string {
-                    return configuration.value("instagram.accessToken");
-                }
-            }()
-        );
         const csrfTokens = new CsrfTokens(
             new class implements ICsrfTokensConfiguration {
                 public secret(): string {
@@ -72,7 +64,13 @@ export class Application {
                         "/",
                         new ActHomeGet(
                             configuration,
-                            instagramImages,
+                            new ImagesInstagramRecentStandartResolution(
+                                new class implements IInstagramConfiguration {
+                                    public accessToken(): string {
+                                        return configuration.value("instagram.accessToken");
+                                    }
+                                }()
+                            ),
                             new OutCookieCsrf(
                                 csrfTokens,
                                 new OutHtml(
@@ -116,18 +114,6 @@ export class Application {
                                     new OutStatusNoContent(
                                         "Success"
                                     )
-                                )
-                            )
-                        )
-                    ),
-                    new RouteGet(
-                        "/portfolio/:ext/:name",
-                        new ActPortfolioGet(
-                            configuration,
-                            instagramImages,
-                            new OutHtml(
-                                new HtmlEngineNunjucks(
-                                    "portfolio/index.html"
                                 )
                             )
                         )
