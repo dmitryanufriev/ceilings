@@ -31,18 +31,8 @@
 
         a {
             display: inline-block;
-            background-color: fadeout(@background-color-dark, 50%);
             outline: none;
-            opacity: .5;
             width: 100%;
-
-            @media (min-width: 468px) {
-                width: 70%;
-            }
-
-            &:hover {
-                opacity: 1;
-            }
 
             i {
                 color: #ffffff;
@@ -52,6 +42,10 @@
     }
 
     #carouselPortfolio {
+        .carousel-inner {
+            background-color: #5A5A5D; // Home page image bg
+        }
+
         img {
             width: 100%;
 
