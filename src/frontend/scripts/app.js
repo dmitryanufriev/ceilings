@@ -93,34 +93,16 @@ var portfolioPage = new Vue({
                 shareWindow.focus();
             }
         },
-        shareUrl: function () {
-            var activePortfolioSlides = document.getElementsByClassName("carousel-item active");
-            if (activePortfolioSlides.length < 1)
-                return;
-            var portfolioImages = activePortfolioSlides[0].getElementsByTagName("img");
-            if (portfolioImages.length < 1)
-                return;
-            var imageSrc = portfolioImages[0].getAttribute("src");
-            if (!imageSrc)
-                return;
-            var regexp = /([^/]+)\.(\w+)$/g;
-            var matches = regexp.exec(imageSrc);
-            if (matches.length < 3)
-                return;
-            var imageName = matches[1];
-            var imageExt = matches[2];
-            return this.host + "/portfolio/" + imageExt + "/" + imageName;
-        },
         shareOnFacebook: function () {
             this.openSharePopup(
                 "Share on Facebook",
-                "https://www.facebook.com/sharer/sharer.php?u=" + this.shareUrl()
+                "https://www.facebook.com/sharer/sharer.php?u=" + this.host
             );
         },
         shareOnVk: function () {
             this.openSharePopup(
                 "Share on VK",
-                "https://vk.com/share.php?url=" + this.shareUrl()
+                "https://vk.com/share.php?url=" + this.host
             );
         }
     }
